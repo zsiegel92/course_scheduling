@@ -1,0 +1,4 @@
+*.tex
+.env
+env/
+venv/
