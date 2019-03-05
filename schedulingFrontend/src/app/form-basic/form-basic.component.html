@@ -1,0 +1,41 @@
+<h3>Student Information</h3>
+<form #f="ngForm">
+	<div class = "container" >
+
+
+			<div class="form-group">
+				<label for="email"><b>Email Address</b></label>
+				<!-- <input type="text" class="form-control" id="email" required> -->
+				<input required type="email" name="email" class="form-control" [(ngModel)]="formService.entry.email" #userEmail="ngModel" placeholder="Please enter a valid email address <address>@<domain>.<extension>" autocomplete='email' email>
+				<div style="color:red;" *ngIf="userEmail.invalid && (userEmail.dirty || userEmail.touched)" class="alert alert-danger">
+					Please enter a valid email address.
+				</div>
+			</div>
+				<br>
+				<div class="form-group">
+					<label for="name"><b>Child's Name</b></label>
+					<input required type="text" name="childname" class="form-control" placeholder="Your child's name" [(ngModel)]="formService.entry.childName">
+				</div>
+				<br>
+				<div class="form-group" >
+					<label for="ac_school"><b>Academic School</b></label>
+					<div *ngIf="all_schools.schools?.length">
+						<div *ngFor="let school of all_schools.schools">
+							<label>
+								<input  name="ac_school" type="radio" [(ngModel)]="selectedSchool" [value]="school"> {{school.name}}
+							</label>
+							<br>
+						</div>
+						<label>
+							<input name="ac_school" type="radio" [(ngModel)]="selectedSchool" [value]="otherSchool"> Other
+						</label>
+					</div>
+					<div [hidden]="selectedSchool!=otherSchool">
+						<input placeholder="Enter academic school name" name="otherSchoolName" type="text" class="form-control" [(ngModel)]="otherSchool.name" #otherSchoolName="ngModel" [required]="selectedSchool==otherSchool">
+						<!-- 				<div [hidden]= "!otherSchoolName.errors?.required" class="alert alert-danger" style="color:red;">
+							Enter the name of this student's academic school
+						</div> -->
+					</div>
+				</div>
+		</div>
+	</form>

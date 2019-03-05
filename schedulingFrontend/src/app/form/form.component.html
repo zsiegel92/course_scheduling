@@ -1,0 +1,47 @@
+<p [hidden]="step>0"> Please fill in the information below to help plan and schedule your curriculum
+	Forms submitted by March 15 th 2019 will be given first preference in terms of course selection.</p>
+<p>
+For assistance submitting this information, please contact [CONTACT EMAIL FOR PLANNING]</p>
+
+<div class="form-component">
+	<br>
+	<button [hidden]="step===0" class="btn btn-secondary btn-lg back" (click)="move(-1)" [disabled]="step===0">
+	BACK
+	</button>
+	<button  [hidden]="step==3" class="btn btn-secondary btn-lg forward" (click)="move(1)" [disabled]="false">
+		<!-- <button  [hidden]="step==3" class="btn btn-secondary btn-lg forward" (click)="move(1)" [disabled]="comp.f.form.invalid"> -->
+	NEXT
+	</button>
+	<button [hidden]="step<3" class="btn btn-primary btn-lg forward"  (click)="submit()" [disabled]="false">
+	<!-- <button [hidden]="step<3" class="btn btn-primary btn-lg forward"  (click)="submit()" [disabled]="comp.f.form.invalid"> -->
+	SUBMIT
+	</button>
+	<br>
+	<br>
+	<app-form-basic #basicform [hidden]="step!==0">
+	</app-form-basic>
+	<!-- <app-form-venue #venueform [hidden]="step!==1"> -->
+	<!-- </app-form-venue> -->
+	<!-- <app-form-date #dateform [hidden]="step!==2"> -->
+	<!-- </app-form-date> -->
+	<!-- <app-form-accommodation #accommodationform [hidden]="step!==3"> -->
+	<!-- </app-form-accommodation> -->
+	<br>
+	<br>
+	<button [hidden]="step===0" class="btn btn-secondary btn-lg back" (click)="move(-1)" [disabled]="step===0">
+	BACK
+	</button>
+	<button [hidden]="step==3" class="btn btn-secondary btn-lg forward"  (click)="move(1)" [disabled]="false">
+	<!-- <button [hidden]="step==3" class="btn btn-secondary btn-lg forward"  (click)="move(1)" [disabled]="comp.f.form.invalid"> -->
+		NEXT
+	</button>
+	<button [hidden]="step<3" class="btn btn-primary btn-lg forward"  (click)="submit()" [disabled]="false">
+	<!-- <button [hidden]="step<3" class="btn btn-primary btn-lg forward"  (click)="submit()" [disabled]="comp.f.form.invalid"> -->
+	SUBMIT
+	</button>
+	<br>
+	<br>
+	<!-- <p><ngb-progressbar type="success" [value]="step*25"></ngb-progressbar></p> -->
+	<br>
+	<br>
+</div>
