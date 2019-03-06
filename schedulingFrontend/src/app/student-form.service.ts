@@ -1,12 +1,14 @@
 import { Injectable, /*OnInit*/ } from '@angular/core';
 
-import { DataService } from './data.service'
+import { DataService } from './data.service';
+import { Student } from './student';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class FormService /*implements OnInit*/ {
-
+export class StudentFormService /*implements OnInit*/ {
+    public student: Student;
 		// public entry: {email: string, childName: string, school: string,schoolId:number,  hebSchool: string,hebSchoolId:number,DOB: Date, rankings: any[],atVenue:boolean,over200: boolean,nonDates: DoubleDate[],accommodation: boolean,accommodation_other: string,twin:boolean,DOBdd: DoubleDate,BMdd:DoubleDate} = {email: '', childName: '', school: '',schoolId:-1,  hebSchool: '',hebSchoolId:-1,DOB: null,rankings: [{name:"Main Sanctuary",value: 0},{name:"Family Minyan",value: 0},{name:"Torah In The Round",value: 0}],atVenue:false,over200:false,nonDates:[],accommodation:false,accommodation_other:'',twin:false,DOBdd:new DoubleDate(),BMdd:new DoubleDate()};
 
 		// public schools: School[];
@@ -36,14 +38,15 @@ export class FormService /*implements OnInit*/ {
   		// this.dataService.submit(this.entry).subscribe();
   	}
 
-  	set_email(email:string){
-  		// this.entry.email=email;
-  	}
+  	// set_email(email:string){
+  	// 	this.entry.email=email;
+  	// }
 
 
   	// avoid_days: DoubleDate[];
 
     constructor(private dataService: DataService) {
+      this.student = new Student();
     	// this.getSchools();
     	// this.getHebSchools();
     }

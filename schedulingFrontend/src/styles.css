@@ -1,1 +1,74 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* everywhere else */
+/** {
+  font-family: Arial, Helvetica, sans-serif;
+}
+*/
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~font-awesome/css/font-awesome.min.css';
+
+body {
+  margin: 2em;
+  background-color: #e0ddd0;
+  color: #4a567a;
+}
+
+h1 {
+  color: #369;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 250%;
+}
+h2, h3 {
+  color: #444;
+  font-family: Arial, Helvetica, sans-serif;
+  /*font-weight: lighter;*/
+}
+
+hr {
+      display: block;
+      position: relative;
+      padding: 0;
+      margin: 8px auto;
+      height: 0;
+      width: 100%;
+      max-height: 0;
+      font-size: 1px;
+      line-height: 0;
+      clear: both;
+      border: none;
+      border-top: 1px solid #aaaaaa;
+      border-bottom: 1px solid #ffffff;
+   }
+
+input[text], button {
+  color: #888;
+  font-family: Cambria, Georgia;
+}
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+
+
+ngb-datepicker {
+	background-color: #faf9f5;
+}
+
+.form-component {
+	background-color: #f8f7f0;
+	border-radius: 25px;
+	padding: 10px;
+}
+
+@media screen and (max-width: 400) {
+	.form-component {
+		padding: 0px;
+		border-radius: 0px;
+	}
+
+}

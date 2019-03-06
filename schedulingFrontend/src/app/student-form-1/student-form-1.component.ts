@@ -1,13 +1,13 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
-
-import { FormService } from '../form.service';
+import { FormsModule,NgForm } from '@angular/forms';
+import { StudentFormService } from '../student-form.service';
 
 @Component({
-  selector: 'app-form-basic',
-  templateUrl: './form-basic.component.html',
-  styleUrls: ['./form-basic.component.css']
+  selector: 'student-form-1',
+  templateUrl: './student-form-1.component.html',
+  styleUrls: ['./student-form-1.component.css']
 })
-export class FormBasicComponent implements OnInit {
+export class StudentForm1Component implements OnInit {
 	@ViewChild("f") f: NgForm;
 
 
@@ -23,7 +23,7 @@ export class FormBasicComponent implements OnInit {
 
 	}
 
-  constructor(public formService: FormService) {
+  constructor(public formService: StudentFormService) {
    //  this.maxDate = {year: now.getFullYear()-5, month: now.getMonth() + 1, day: now.getDate()};
   	// this.minDate = {year: now.getFullYear() - 15, month: now.getMonth() + 1, day: now.getDate()};
   	// this.otherSchool = new School();

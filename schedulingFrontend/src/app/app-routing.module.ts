@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { FormComponent } from './form/form.component';
+import { StudentFormComponent } from './student-form/student-form.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 // import { SubmittedComponent } from './submitted/submitted.component';
 // import { SubmissionsComponent } from './submissions/submissions.component';
 
 const routes: Routes = [
-  { path: 'form', component: FormComponent },
+  { path: 'studentForm', component: StudentFormComponent },
   // { path: 'submitted', component: SubmittedComponent },
   // { path: 'submissions/:code',component: SubmissionsComponent },
  	// { path: 'submissions',component: SubmissionsComponent },

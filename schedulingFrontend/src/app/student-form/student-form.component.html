@@ -4,6 +4,8 @@
 For assistance submitting this information, please contact [CONTACT EMAIL FOR PLANNING]</p>
 
 <div class="form-component">
+
+	{{student |json}}
 	<br>
 	<button [hidden]="step===0" class="btn btn-secondary btn-lg back" (click)="move(-1)" [disabled]="step===0">
 	BACK
@@ -18,8 +20,36 @@ For assistance submitting this information, please contact [CONTACT EMAIL FOR PL
 	</button>
 	<br>
 	<br>
-	<app-form-basic #basicform [hidden]="step!==0">
-	</app-form-basic>
+
+
+
+	<form #f="ngForm">
+		<div class = "container" >
+			<div [hidden]="step!==0">
+				FORM PAGE 0
+				<div class="form-group">
+					<label for="email"><b>Email Address</b></label>
+					<input required type="email" name="email" class="form-control" [(ngModel)]="student.email" #userEmail="ngModel" placeholder="Please enter a valid email address <address>@<domain>.<extension>" autocomplete='email' email>
+					<!-- <input required type="email" name="email" class="form-control" placeholder="Please enter a valid email address <address>@<domain>.<extension>" autocomplete='email' email> -->
+					<!-- <div style="color:red;" *ngIf="userEmail.invalid && (userEmail.dirty || userEmail.touched)" class="alert alert-danger"> -->
+					<div style="color:red;" *ngIf="true" class="alert alert-danger">
+						Please enter a valid email address.
+					</div>
+				</div> <!-- form-group -->
+				<br>
+				<div class="form-group">
+					<label for="name"><b>Child's Name</b></label>
+					<!-- <input required type="text" name="childname" class="form-control" placeholder="Your child's name" [(ngModel)]="studentFormService.entry.childName"> -->
+					<input required type="text" name="childname" class="form-control" placeholder="Your child's name">
+				</div>
+			</div> <!-- step -->
+			<div [hidden]="step!==1">
+				FORM PAGE 1
+
+			</div> <!-- step -->
+		</div>
+	</form>
+
 	<!-- <app-form-venue #venueform [hidden]="step!==1"> -->
 	<!-- </app-form-venue> -->
 	<!-- <app-form-date #dateform [hidden]="step!==2"> -->
