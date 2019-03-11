@@ -1,0 +1,7 @@
+<form>
+<div class="form-group">
+	<label for="theMessage"><b>Message</b></label>
+	<input name="theMessage" type="text" [(ngModel)]="message">
+	<button type="submit" (click)="messageService.add(message);message='';">Send message</button>
+</div>
+</form>

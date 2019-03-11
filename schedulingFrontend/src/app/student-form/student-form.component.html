@@ -3,26 +3,23 @@
 <p>
 For assistance submitting this information, please contact [CONTACT EMAIL FOR PLANNING]</p>
 
+{{student |json}}
 <div class="form-component">
-
-	{{student |json}}
 	<br>
-	<button [hidden]="step===0" class="btn btn-secondary btn-lg back" (click)="move(-1)" [disabled]="step===0">
+	<button [style.visibility]="step===0 ? 'hidden' : 'visible'" [disabled]="step===0" class="btn btn-secondary btn-lg back" (click)="move(-1)" >
 	BACK
 	</button>
-	<button  [hidden]="step==3" class="btn btn-secondary btn-lg forward" (click)="move(1)" [disabled]="false">
-		<!-- <button  [hidden]="step==3" class="btn btn-secondary btn-lg forward" (click)="move(1)" [disabled]="comp.f.form.invalid"> -->
+	<button  [hidden]="step==numSteps-1" class="btn btn-secondary btn-lg forward" (click)="move(1)" [disabled]="f.form.invalid">
 	NEXT
 	</button>
-	<button [hidden]="step<3" class="btn btn-primary btn-lg forward"  (click)="submit()" [disabled]="false">
-	<!-- <button [hidden]="step<3" class="btn btn-primary btn-lg forward"  (click)="submit()" [disabled]="comp.f.form.invalid"> -->
+	<button class="btn btn-secondary btn-lg forward" (click)="move(1)">
+	NEXT-TESTING
+	</button>
+	<button [hidden]="step<numSteps-1" class="btn btn-primary btn-lg forward"  (click)="submit()" [disabled]="f.form.invalid">
 	SUBMIT
 	</button>
 	<br>
 	<br>
-
-
-
 	<form #f="ngForm">
 		<div class = "container" >
 			<div [hidden]="step!==0">
@@ -30,17 +27,17 @@ For assistance submitting this information, please contact [CONTACT EMAIL FOR PL
 				<div class="form-group">
 					<label for="email"><b>Email Address</b></label>
 					<input required type="email" name="email" class="form-control" [(ngModel)]="student.email" #userEmail="ngModel" placeholder="Please enter a valid email address <address>@<domain>.<extension>" autocomplete='email' email>
-					<!-- <input required type="email" name="email" class="form-control" placeholder="Please enter a valid email address <address>@<domain>.<extension>" autocomplete='email' email> -->
-					<!-- <div style="color:red;" *ngIf="userEmail.invalid && (userEmail.dirty || userEmail.touched)" class="alert alert-danger"> -->
-					<div style="color:red;" *ngIf="true" class="alert alert-danger">
+					<div style="color:red;" *ngIf="userEmail.invalid && (userEmail.dirty || userEmail.touched)" class="alert alert-danger">
 						Please enter a valid email address.
 					</div>
 				</div> <!-- form-group -->
 				<br>
 				<div class="form-group">
 					<label for="name"><b>Child's Name</b></label>
-					<!-- <input required type="text" name="childname" class="form-control" placeholder="Your child's name" [(ngModel)]="studentFormService.entry.childName"> -->
-					<input required type="text" name="childname" class="form-control" placeholder="Your child's name">
+					<input required type="text" name="childname" class="form-control" [(ngModel)]="student.name" #userName="ngModel" placeholder="Your child's name">
+					<div style="color:red;" *ngIf="userName.invalid && (userName.dirty || userName.touched)" class="alert alert-danger">
+						Please enter a name.
+					</div>
 				</div>
 			</div> <!-- step -->
 			<div [hidden]="step!==1">
@@ -58,20 +55,18 @@ For assistance submitting this information, please contact [CONTACT EMAIL FOR PL
 	<!-- </app-form-accommodation> -->
 	<br>
 	<br>
-	<button [hidden]="step===0" class="btn btn-secondary btn-lg back" (click)="move(-1)" [disabled]="step===0">
+	<button [style.visibility]="step===0 ? 'hidden' : 'visible'" class="btn btn-secondary btn-lg back" (click)="move(-1)" [disabled]="step===0">
 	BACK
 	</button>
-	<button [hidden]="step==3" class="btn btn-secondary btn-lg forward"  (click)="move(1)" [disabled]="false">
-	<!-- <button [hidden]="step==3" class="btn btn-secondary btn-lg forward"  (click)="move(1)" [disabled]="comp.f.form.invalid"> -->
+	<button [hidden]="step==numSteps-1" class="btn btn-secondary btn-lg forward"  (click)="move(1)" [disabled]="f.form.invalid">
 		NEXT
 	</button>
-	<button [hidden]="step<3" class="btn btn-primary btn-lg forward"  (click)="submit()" [disabled]="false">
-	<!-- <button [hidden]="step<3" class="btn btn-primary btn-lg forward"  (click)="submit()" [disabled]="comp.f.form.invalid"> -->
+	<button [hidden]="step<numSteps-1" class="btn btn-primary btn-lg forward"  (click)="submit()" [disabled]="f.form.invalid">
 	SUBMIT
 	</button>
 	<br>
 	<br>
-	<!-- <p><ngb-progressbar type="success" [value]="step*25"></ngb-progressbar></p> -->
+	<p><ngb-progressbar type="success" [value]="step" [max]="numSteps"></ngb-progressbar></p>
 	<br>
 	<br>
 </div>
