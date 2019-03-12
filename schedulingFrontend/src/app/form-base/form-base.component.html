@@ -1,7 +1,7 @@
+f.form: {{f.form | json}}
 <p [hidden]="step>0"> {{topText}}</p>
 <p>
 For assistance submitting this information, please contact {{contactEmail}}</p>
-
 <div class="form-component">
 	<br>
 	<button [style.visibility]="step===0 ? 'hidden' : 'visible'" [disabled]="step===0" class="btn btn-secondary btn-lg back" (click)="move(-1)" >
