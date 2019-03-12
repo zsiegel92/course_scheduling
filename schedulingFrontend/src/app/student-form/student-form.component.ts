@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../data.service';
 import { StudentFormService } from '../student-form.service';
@@ -11,10 +11,11 @@ import { Student } from '../student';
   templateUrl: './student-form.component.html',
   styleUrls: ['./student-form.component.css']
 })
-export class StudentFormComponent implements OnInit {
+export class StudentFormComponent implements AfterViewInit {
+	@ViewChildren('page') pages !: QueryList<any>;
 	// comps: any[];
-	numSteps: number = 4;
-	step: number;
+	numSteps: number = 0;
+	step: number = 0;
 	// public comp;
 	student: Student;
 
@@ -43,15 +44,21 @@ export class StudentFormComponent implements OnInit {
 		return false
 	}
 
+	isHidden(p: any){
+		return false;
+	}
+
   constructor(private dataService: DataService,private studentFormService: StudentFormService,private router: Router, private messageService: MessageService) {
-  	this.step=0;
   	this.student = this.studentFormService.student;
   }
 
-  ngOnInit() {
-  	// this.comps = [this.studentForm1];
-  	// this.comps = [];
-  	// this.setcomp();
+  ngAfterViewInit() {
+  	setTimeout(() => {
+  		this.pages.map((p) => {
+  			this.numSteps++;
+  			return this.numSteps-1;
+  		});
+  	});
   }
 
 }

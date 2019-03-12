@@ -15,6 +15,8 @@ import { StudentFormComponent } from './student-form/student-form.component';
 import { StudentFormService } from './student-form.service';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageWriterComponent } from './message-writer/message-writer.component';
+import { FormPageComponent } from './form-page/form-page.component';
+import { FormBaseComponent } from './form-base/form-base.component';
 // import { StudentForm1Component } from './student-form-1/student-form-1.component';
 // import { FormVenueComponent } from './form-venue/form-venue.component';
 // import { FormDateComponent } from './form-date/form-date.component';
@@ -29,6 +31,8 @@ import { MessageWriterComponent } from './message-writer/message-writer.componen
     StudentFormComponent,
     MessagesComponent,
     MessageWriterComponent,
+    FormPageComponent,
+    FormBaseComponent,
     // StudentForm1Component
   ],
   imports: [
