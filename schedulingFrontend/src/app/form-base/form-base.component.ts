@@ -1,8 +1,8 @@
 import { Component, OnInit, AfterContentInit, QueryList, Input, ViewChild, ViewChildren, ContentChildren, ContentChild,ElementRef} from '@angular/core';
-import { Router } from '@angular/router';
-import { DataService } from '../data.service';
+// import { Router } from '@angular/router';
+// import { DataService } from '../data.service';
 // import { StudentFormService } from '../student-form.service';
-import { MessageService } from '../message.service';
+// import { MessageService } from '../message.service';
 import { FormService } from '../form.service';
 
 @Component({
@@ -14,12 +14,15 @@ export class FormBaseComponent implements AfterContentInit {
 	@Input('top-text') topText: string;
 	@Input('contact-email') contactEmail: string;
 	@Input('form-service') formService !: FormService;
-	@ContentChildren('page') pages !: QueryList<any>;
+	@ContentChildren('page', {read: ElementRef,descendants: true}) pages !: QueryList<ElementRef>;
+	@ContentChild('f') f !: any;
 	comps: any[] = [];
 	numSteps: number = 0;
-	step: number = 0;
-	styles: String[] = [];
-
+	step: number;
+	comp: any;
+	formGroupNames: String[] = [];
+	formGroupName: String = '';
+	formGroup: any;
 
 	removeToken(string: String,token: String){
 		var oldList: String[] = string.split(" ");
@@ -31,51 +34,58 @@ export class FormBaseComponent implements AfterContentInit {
 		}
 		return newList.join(" ");
 	}
+
+	validStep(steps:number): boolean{
+		return ((this.step + steps > -1) && (this.step + steps < this.numSteps));
+	}
+	hideComp():void {
+		var p = this.comp.nativeElement.className;
+		p = p + " hidden";
+		this.comp.nativeElement.className = p;
+	}
+	showComp():void{
+		var p = this.comp.nativeElement.className;
+		p = this.removeToken(p,'hidden');
+		this.comp.nativeElement.className = p;
+	}
 	move(steps:number):void{
 		// this.comp.syncForm();
-		if ((this.step + steps > -1) && (this.step + steps < this.numSteps)){
-			var p1 = this.comps[this.step].nativeElement.className;
-			let p2 = this.comps[this.step + steps].nativeElement.className;
-
-			p1 = p1 + ' hidden';
-			p2 = this.removeToken(p2,'hidden');
-
-			this.comps[this.step].nativeElement.className = p1;
-			this.comps[this.step + steps].nativeElement.className= p2;
-
+		if (this.validStep(steps)){
 			this.step = this.step + steps;
+			this.setComp();
 		}
-		// this.setcomp();
 	}
 
-	setcomp(){
-		// this.comp = this.comps[this.step];
-		// this.comp.prepForm();
+	setComp(){
+		this.hideComp();
+		this.comp = this.comps[this.step];
+		this.formGroupName = this.formGroupNames[this.step];
+		this.showComp();
 	}
 
 	submit(){
 		// this.comp.syncForm();
 		this.formService.submit();
-		this.router.navigate(['/submitted']);
 	}
 
-
-  constructor(private dataService: DataService,private router: Router, private messageService: MessageService) {
+	logComps(){
+		console.log(this.comps);
+	}
+  constructor() {
   	this.contactEmail='';
   	this.topText='';
+  	this.step=0;
   }
   ngAfterContentInit() {
-  	// setTimeout(() => {
   		this.pages.map((p) => {
   			this.comps.push(p);
-  			p.nativeElement.className = 'hidden';
-  			// this.styles.push('hidden');
-  			// p.ngClass = styles[this.numSteps];
+  			this.formGroupNames.push(p.nativeElement.getAttribute('ngModelGroup'));
+  			p.nativeElement.className = 'hidden';//UNCOMMENT
   			this.numSteps++;
-  			return this.numSteps-1;
   		});
-  	// });
-  	this.comps[0].nativeElement.className = this.removeToken(this.comps[0].nativeElement.className,'hidden');
+  	this.comp = this.comps[0];
+  	this.formGroupName = this.formGroupNames[0];
+  	this.showComp();//UNCOMMENT
 
   }
 

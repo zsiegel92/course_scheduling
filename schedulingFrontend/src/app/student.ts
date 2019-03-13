@@ -3,6 +3,7 @@ export class Student {
   first: string;
   last: string;
   email: string;
+  email2: string;
   address: string;
   zip: string;
   phone: string;
@@ -13,5 +14,6 @@ export class Student {
   	this.first = '';
   	this.last = '';
   	this.email = '';
+  	this.email2 = '';
   }
 }

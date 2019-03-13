@@ -1,5 +1,39 @@
-f.form: {{f.form | json}}
-<p [hidden]="step>0"> {{topText}}</p>
+<div class='testing'>
+	<h3>TESTING BASE FORM</h3>
+	pages.length: {{pages.length }} pages: {{pages | json}}
+	<br>
+	<!-- comps: {{comps | json}} -->
+	<br>
+	f.form.value: {{f.form.value | json}}
+<!-- 	<br>
+	f.form.controls.basic: {{f.form.controls.basic | json}}
+	<br> -->
+	<br>
+	<!-- f.form.controls.basic.valid: {{f.form.controls.basic.valid}} -->
+	<br>
+	formGroupName: {{formGroupName}}
+	<br>
+	f.form.controls[formGroupName].status: {{f.form.controls[formGroupName].status}}
+	<br>
+	f.form.controls[formGroupName].valid: {{f.form.controls[formGroupName].valid}}	<!-- comp: {{comp | json}} -->
+	<div *ngFor="let field of f.form.controls['basic'] | keyvalue">
+		{{field.key}}: {{field.value}}
+
+	</div>
+	<br>
+	<button class="btn btn-secondary btn-lg back" (click)="move(-1)" >
+	BACK
+	</button>
+	<button class="btn btn-secondary btn-lg forward" (click)="move(1)">
+	NEXT
+	</button>
+	<button class="btn btn-primary btn-lg forward"  (click)="submit()">
+	SUBMIT
+	</button>
+	<button (click)="logComps()">log comps</button>
+</div>
+
+<p> {{topText}}</p>
 <p>
 For assistance submitting this information, please contact {{contactEmail}}</p>
 <div class="form-component">
@@ -7,20 +41,17 @@ For assistance submitting this information, please contact {{contactEmail}}</p>
 	<button [style.visibility]="step===0 ? 'hidden' : 'visible'" [disabled]="step===0" class="btn btn-secondary btn-lg back" (click)="move(-1)" >
 	BACK
 	</button>
-	<button  [hidden]="step==numSteps-1" class="btn btn-secondary btn-lg forward" (click)="move(1)" [disabled]="f.form.invalid">
+	<button  [hidden]="step==numSteps-1" class="btn btn-secondary btn-lg forward" (click)="move(1)" [disabled]="!f.form.controls[formGroupName].valid">
 	NEXT
 	</button>
-	<button class="btn btn-secondary btn-lg forward" (click)="move(1)">
-	NEXT-TESTING
-	</button>
-	<button [hidden]="step<numSteps-1" class="btn btn-primary btn-lg forward"  (click)="submit()" [disabled]="f.form.invalid">
+	<button [hidden]="step<numSteps-1" class="btn btn-primary btn-lg forward"  (click)="submit()" [disabled]="!f.form.controls[formGroupName].valid">
 	SUBMIT
 	</button>
-	<form #f="ngForm" >
+
 
 			<ng-content></ng-content>
 
-	</form>
+
 
 	<!-- <app-form-venue #venueform [hidden]="step!==1"> -->
 	<!-- </app-form-venue> -->
@@ -32,10 +63,10 @@ For assistance submitting this information, please contact {{contactEmail}}</p>
 	<button [style.visibility]="step===0 ? 'hidden' : 'visible'" class="btn btn-secondary btn-lg back" (click)="move(-1)" [disabled]="step===0">
 	BACK
 	</button>
-	<button [hidden]="step==numSteps-1" class="btn btn-secondary btn-lg forward"  (click)="move(1)" [disabled]="f.form.invalid">
+	<button [hidden]="step==numSteps-1" class="btn btn-secondary btn-lg forward"  (click)="move(1)" [disabled]="!f.form.controls[formGroupName].valid">
 		NEXT
 	</button>
-	<button [hidden]="step<numSteps-1" class="btn btn-primary btn-lg forward"  (click)="submit()" [disabled]="f.form.invalid">
+	<button [hidden]="step<numSteps-1" class="btn btn-primary btn-lg forward"  (click)="submit()" [disabled]="!f.form.controls[formGroupName].valid">
 	SUBMIT
 	</button>
 	<br>

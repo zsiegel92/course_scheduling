@@ -72,6 +72,11 @@ ngb-datepicker {
 .crazy {
 	border-left: 10px;
 }
+.testing {
+	background-color: #f8f7f0;
+	border-radius: 25px;
+	padding: 10px;
+}
 
 @media screen and (max-width: 400) {
 	.form-component {

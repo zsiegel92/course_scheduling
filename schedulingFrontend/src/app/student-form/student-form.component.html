@@ -1,11 +1,16 @@
+<div class='testing'>
+	<h3>TESTING STUDENT FORM</h3>
+	student: {{student | json}}
+	<br>
+	group: {{group.value | json}}
+	<br>
+	page: {{comp}}
+</div>
 <app-form-base top-text="Please fill in the information below to help Course Scheduling Automation plan and schedule course offerings.
 	Please submit by March 20, 2019." contact-email="zs@gmail.com" [form-service]="studentFormService">
-		<div #page>
-		<!-- <div [hidden]="step!==0" #page> -->
-			<!-- <div [hidden]="isHidden(page)" #page> -->
-			<!-- <div [hidden]="step!==0" #page> -->
+	<form #f="ngForm">
+		<div #page ngModelGroup="basic" #group="ngModelGroup">
 				<h3>Basic Information</h3>
-
 				<div class="form-row">
 					<div class="col">
 						<label for="first"><b>Student's First Name</b></label>
@@ -41,18 +46,22 @@
 					</div>
 				</div>
 
-<!-- 				address: string;
-				zip: string;
-				phone: string; -->
-			</div> <!-- step -->
-			<!-- <div [hidden]="step!==1" #page> -->
-			<div #page>
-				FORM PAGE 1
-
 			</div> <!-- step -->
 
-			<div #page>
+			<div #page ngModelGroup="interests" #group="ngModelGroup">
+				<h3>Interests</h3>
+				<div class="form-group">
+					<label for="email2"><b>Email Address</b></label>
+					<input required type="email" name="email2" class="form-control" [(ngModel)]="student.email2" #email2="ngModel" placeholder="<address>@<domain>.<extension>" autocomplete='email' email>
+					<div [hidden]="email2.valid || email2.pristine" class="alert alert-danger">
+						Please enter a valid email address.
+					</div>
+				</div> <!-- form-group -->
+			</div> <!-- step -->
+
+			<div #page ngModelGroup="courses" #group="ngModelGroup">
 				FORM PAGE 2
 
 			</div> <!-- step -->
+	</form>
 </app-form-base>
