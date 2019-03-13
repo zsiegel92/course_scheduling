@@ -6,5 +6,6 @@ import { Injectable } from '@angular/core';
 export abstract class FormService {
 
   abstract submit(): void;
+  formName: string;
 
 }

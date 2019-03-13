@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class StudentFormService implements FormService {
     public student: Student;
-
+    public formName: string = "StudentForm";
   	submit(){
       this.router.navigate(['/submitted']);
   	}

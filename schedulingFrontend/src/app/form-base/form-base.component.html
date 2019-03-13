@@ -10,15 +10,20 @@
 	<br> -->
 	<br>
 	<!-- f.form.controls.basic.valid: {{f.form.controls.basic.valid}} -->
+	<!-- formGroup: {{formGroup | json}} -->
 	<br>
 	formGroupName: {{formGroupName}}
 	<br>
-	f.form.controls[formGroupName].status: {{f.form.controls[formGroupName].status}}
-	<br>
-	f.form.controls[formGroupName].valid: {{f.form.controls[formGroupName].valid}}	<!-- comp: {{comp | json}} -->
-	<div *ngFor="let field of f.form.controls['basic'] | keyvalue">
-		{{field.key}}: {{field.value}}
+	<div *ngIf="f.form.controls[formGroupName]">
+		f.form.controls[formGroupName].status: {{f.form.controls[formGroupName].status}}
+		<br>
+		f.form.controls[formGroupName].valid: {{f.form.controls[formGroupName].valid}}	<!-- comp: {{comp | json}} -->
+		<br>
+		<b>f.form.controls[{{formGroupName}}]</b>
+		<div *ngFor="let field of f.form.controls[formGroupName] | keyvalue">
+			{{field.key}}: {{field.value}}
 
+		</div>
 	</div>
 	<br>
 	<button class="btn btn-secondary btn-lg back" (click)="move(-1)" >
@@ -41,10 +46,10 @@ For assistance submitting this information, please contact {{contactEmail}}</p>
 	<button [style.visibility]="step===0 ? 'hidden' : 'visible'" [disabled]="step===0" class="btn btn-secondary btn-lg back" (click)="move(-1)" >
 	BACK
 	</button>
-	<button  [hidden]="step==numSteps-1" class="btn btn-secondary btn-lg forward" (click)="move(1)" [disabled]="!f.form.controls[formGroupName].valid">
+	<button  [hidden]="step==numSteps-1" class="btn btn-secondary btn-lg forward" (click)="move(1)" [disabled]="formGroup ? !formGroup.valid : true">
 	NEXT
 	</button>
-	<button [hidden]="step<numSteps-1" class="btn btn-primary btn-lg forward"  (click)="submit()" [disabled]="!f.form.controls[formGroupName].valid">
+	<button [hidden]="step<numSteps-1" class="btn btn-primary btn-lg forward"  (click)="submit()" [disabled]="formGroup ? !formGroup.valid : true">
 	SUBMIT
 	</button>
 
@@ -63,10 +68,10 @@ For assistance submitting this information, please contact {{contactEmail}}</p>
 	<button [style.visibility]="step===0 ? 'hidden' : 'visible'" class="btn btn-secondary btn-lg back" (click)="move(-1)" [disabled]="step===0">
 	BACK
 	</button>
-	<button [hidden]="step==numSteps-1" class="btn btn-secondary btn-lg forward"  (click)="move(1)" [disabled]="!f.form.controls[formGroupName].valid">
+	<button [hidden]="step==numSteps-1" class="btn btn-secondary btn-lg forward"  (click)="move(1)" [disabled]="formGroup ? !formGroup.valid : true">
 		NEXT
 	</button>
-	<button [hidden]="step<numSteps-1" class="btn btn-primary btn-lg forward"  (click)="submit()" [disabled]="!f.form.controls[formGroupName].valid">
+	<button [hidden]="step<numSteps-1" class="btn btn-primary btn-lg forward"  (click)="submit()" [disabled]="formGroup ? !formGroup.valid : true">
 	SUBMIT
 	</button>
 	<br>

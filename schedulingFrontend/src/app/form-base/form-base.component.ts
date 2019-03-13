@@ -20,9 +20,9 @@ export class FormBaseComponent implements AfterContentInit {
 	numSteps: number = 0;
 	step: number;
 	comp: any;
-	formGroupNames: String[] = [];
-	formGroupName: String = '';
-	formGroup: any;
+	formGroupNames: string[] = [];
+	formGroupName: string = '';
+	formGroup: any = {};
 
 	removeToken(string: String,token: String){
 		var oldList: String[] = string.split(" ");
@@ -60,6 +60,7 @@ export class FormBaseComponent implements AfterContentInit {
 		this.hideComp();
 		this.comp = this.comps[this.step];
 		this.formGroupName = this.formGroupNames[this.step];
+		this.formGroup = this.f.form.controls[this.formGroupName];
 		this.showComp();
 	}
 
@@ -81,10 +82,12 @@ export class FormBaseComponent implements AfterContentInit {
   			this.comps.push(p);
   			this.formGroupNames.push(p.nativeElement.getAttribute('ngModelGroup'));
   			p.nativeElement.className = 'hidden';//UNCOMMENT
+  			p.nativeElement.ngModelGroup = this.formService.formName + this.numSteps;
   			this.numSteps++;
   		});
   	this.comp = this.comps[0];
   	this.formGroupName = this.formGroupNames[0];
+  	this.formGroup = this.f.form.controls[this.formGroupName];
   	this.showComp();//UNCOMMENT
 
   }
