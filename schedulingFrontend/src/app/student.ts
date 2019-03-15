@@ -1,19 +1,18 @@
+import { Skill } from './skill';
+
 export class Student {
-  id: number;
-  first: string;
-  last: string;
-  email: string;
-  email2: string;
+  id: number = -1;
+  first: string = '';
+  last: string = '';
+  email: string = '';
   address: string;
   zip: string;
   phone: string;
   prefs: any[];
+  skills: Skill[] = [];
+  interests = {};
+
 
   constructor(){
-  	this.id=-1;
-  	this.first = '';
-  	this.last = '';
-  	this.email = '';
-  	this.email2 = '';
   }
 }

@@ -47,14 +47,15 @@
 			</div> <!-- step -->
 
 			<div #page ngModelGroup="interests">
+				{{student.interests | json}}
+				FIX THIS MAKE BINDING WORK PROPERLY, ADD T/F ON ALL STUDENT INTEREST FIELDS
 				<h3>Interests</h3>
 				<div class="form-group">
-					<label for="email2"><b>Email Address</b></label>
-					<input required type="email" name="email2" class="form-control" [(ngModel)]="student.email2" #email2="ngModel" placeholder="<address>@<domain>.<extension>" autocomplete='email' email>
-					<div [hidden]="email2.valid || email2.pristine" class="alert alert-danger">
-						Please enter a valid email address.
+					<div  *ngFor="let interest of interests">
+						<label [for]="interest.name"><b>{{interest.name}}</b></label>
+						<input required type="checkbox" [name]="interest.name" class="form-control" value="false" [(ngModel)]="student.interests[interest.name]">
 					</div>
-				</div> <!-- form-group -->
+				</div>
 			</div> <!-- step -->
 
 			<div #page ngModelGroup="courses">

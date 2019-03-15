@@ -6,6 +6,8 @@ import { StudentFormService } from '../student-form.service';
 // import { StudentForm1Component } from '../student-form-1/student-form-1.component';
 import { Student } from '../student';
 import { FormBaseComponent } from '../form-base/form-base.component';
+import { Skill } from '../skill';
+
 
 @Component({
   selector: 'app-student-form',
@@ -15,9 +17,25 @@ import { FormBaseComponent } from '../form-base/form-base.component';
 export class StudentFormComponent implements AfterViewInit {
 	// @ViewChild(FormBaseComponent) f;
 	student: Student;
+	interests: Skill[]=[];
 
+
+	// toggleSkill(interest: Skill){
+	// 	if (this.student.interests.some(e => ((e.name == interest.name) && (e.id == interest.id)))){
+	// 		var index = this.student.interests.indexOf(interest);
+	// 		this.student.interests.splice(index, 1);
+	// 	}
+	// 	else {
+	// 		this.student.interests.push(interest);
+	// 	}
+	// }
   constructor(public studentFormService: StudentFormService) {
   	this.student = this.studentFormService.student;
+  	this. interests = this.studentFormService.interests;
+  	for (let interest of this.interests){
+  		// this.student.interests[interest]=false;
+  	}
+
   }
 
   ngAfterViewInit() {
