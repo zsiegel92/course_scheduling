@@ -1,9 +1,11 @@
-import { Component, OnInit, AfterContentInit, QueryList, Input, ViewChild, ViewChildren, ContentChildren, ContentChild,ElementRef} from '@angular/core';
+import { Component, OnInit, OnChanges,AfterContentInit,AfterViewInit, AfterViewChecked, QueryList, Input, ViewChild, ViewChildren, ContentChildren, ContentChild,ElementRef, ChangeDetectorRef} from '@angular/core';
+import { take } from 'rxjs/operators';
 // import { Router } from '@angular/router';
 // import { DataService } from '../data.service';
 // import { StudentFormService } from '../student-form.service';
 // import { MessageService } from '../message.service';
 import { FormService } from '../form.service';
+
 
 @Component({
   selector: 'app-form-base',
@@ -18,7 +20,7 @@ export class FormBaseComponent implements AfterContentInit {
 	@ContentChild('f') f !: any;
 	comps: any[] = [];
 	numSteps: number = 0;
-	step: number;
+	step: number = 0;
 	comp: any;
 	formGroupNames: string[] = [];
 	formGroupName: string = '';
@@ -38,16 +40,7 @@ export class FormBaseComponent implements AfterContentInit {
 	validStep(steps:number): boolean{
 		return ((this.step + steps > -1) && (this.step + steps < this.numSteps));
 	}
-	hideComp():void {
-		var p = this.comp.nativeElement.className;
-		p = p + " hidden";
-		this.comp.nativeElement.className = p;
-	}
-	showComp():void{
-		var p = this.comp.nativeElement.className;
-		p = this.removeToken(p,'hidden');
-		this.comp.nativeElement.className = p;
-	}
+
 	move(steps:number):void{
 		// this.comp.syncForm();
 		if (this.validStep(steps)){
@@ -64,33 +57,47 @@ export class FormBaseComponent implements AfterContentInit {
 		this.showComp();
 	}
 
+	hideAComp(p: any):void{
+			var pclasses = p.nativeElement.className;
+			pclasses = pclasses + " hidden";
+			p.nativeElement.className = pclasses;
+	}
+	hideComp():void {
+		if (this.comp){
+			this.hideAComp(this.comp);
+		}
+	}
+	showComp():void{
+		if (this.comp){
+			var p = this.comp.nativeElement.className;
+			p = this.removeToken(p,'hidden');
+			this.comp.nativeElement.className = p;
+		}
+	}
 	submit(){
 		// this.comp.syncForm();
 		this.formService.submit();
 	}
 
-	logComps(){
-		console.log(this.comps);
-	}
-  constructor() {
-  	this.contactEmail='';
-  	this.topText='';
-  	this.step=0;
-  }
   ngAfterContentInit() {
-  		this.pages.map((p) => {
-  			this.comps.push(p);
-  			this.formGroupNames.push(p.nativeElement.getAttribute('ngModelGroup'));
-  			p.nativeElement.className = 'hidden';//UNCOMMENT
-  			p.nativeElement.ngModelGroup = this.formService.formName + this.numSteps;
-  			this.numSteps++;
-  		});
-  	this.comp = this.comps[0];
-  	this.formGroupName = this.formGroupNames[0];
-  	this.formGroup = this.f.form.controls[this.formGroupName];
-  	this.showComp();//UNCOMMENT
+  	this.pages.map((p) => {
+  		// p.nativeElement.setAttribute('ngModelGroup',this.formService.formName + this.numSteps)
+  		return p;
+  	}).map((p) =>   	{
+  		this.comps.push(p);
+  		this.formGroupNames.push(p.nativeElement.getAttribute('ngModelGroup'));
+  		this.hideAComp(p);
+  		this.numSteps++;
+  	});
 
+  	this.f.valueChanges.pipe(take(1)).subscribe(form => {
+  		this.setComp();
+  	});
   }
-
+  constructor() {
+  }
 
 }
+
+
+

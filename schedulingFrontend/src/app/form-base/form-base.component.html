@@ -1,30 +1,9 @@
 <div class='testing'>
 	<h3>TESTING BASE FORM</h3>
-	pages.length: {{pages.length }} pages: {{pages | json}}
-	<br>
-	<!-- comps: {{comps | json}} -->
-	<br>
-	f.form.value: {{f.form.value | json}}
-<!-- 	<br>
-	f.form.controls.basic: {{f.form.controls.basic | json}}
-	<br> -->
-	<br>
-	<!-- f.form.controls.basic.valid: {{f.form.controls.basic.valid}} -->
-	<!-- formGroup: {{formGroup | json}} -->
-	<br>
-	formGroupName: {{formGroupName}}
-	<br>
-	<div *ngIf="f.form.controls[formGroupName]">
-		f.form.controls[formGroupName].status: {{f.form.controls[formGroupName].status}}
-		<br>
-		f.form.controls[formGroupName].valid: {{f.form.controls[formGroupName].valid}}	<!-- comp: {{comp | json}} -->
-		<br>
-		<b>f.form.controls[{{formGroupName}}]</b>
-		<div *ngFor="let field of f.form.controls[formGroupName] | keyvalue">
+	Form: {{f.form.value | json}}
+<!-- 		<div *ngFor="let field of f.form.value | keyvalue">
 			{{field.key}}: {{field.value}}
-
-		</div>
-	</div>
+		</div> -->
 	<br>
 	<button class="btn btn-secondary btn-lg back" (click)="move(-1)" >
 	BACK
@@ -35,7 +14,6 @@
 	<button class="btn btn-primary btn-lg forward"  (click)="submit()">
 	SUBMIT
 	</button>
-	<button (click)="logComps()">log comps</button>
 </div>
 
 <p> {{topText}}</p>
@@ -46,10 +24,10 @@ For assistance submitting this information, please contact {{contactEmail}}</p>
 	<button [style.visibility]="step===0 ? 'hidden' : 'visible'" [disabled]="step===0" class="btn btn-secondary btn-lg back" (click)="move(-1)" >
 	BACK
 	</button>
-	<button  [hidden]="step==numSteps-1" class="btn btn-secondary btn-lg forward" (click)="move(1)" [disabled]="formGroup ? !formGroup.valid : true">
+	<button  [hidden]="step==numSteps-1" class="btn btn-secondary btn-lg forward" (click)="move(1)" [disabled]="!(formGroup?.valid)">
 	NEXT
 	</button>
-	<button [hidden]="step<numSteps-1" class="btn btn-primary btn-lg forward"  (click)="submit()" [disabled]="formGroup ? !formGroup.valid : true">
+	<button [hidden]="step<numSteps-1" class="btn btn-primary btn-lg forward"  (click)="submit()" [disabled]="!(formGroup?.valid)">
 	SUBMIT
 	</button>
 
@@ -64,14 +42,13 @@ For assistance submitting this information, please contact {{contactEmail}}</p>
 	<!-- </app-form-date> -->
 	<!-- <app-form-accommodation #accommodationform [hidden]="step!==3"> -->
 	<!-- </app-form-accommodation> -->
-
 	<button [style.visibility]="step===0 ? 'hidden' : 'visible'" class="btn btn-secondary btn-lg back" (click)="move(-1)" [disabled]="step===0">
 	BACK
 	</button>
-	<button [hidden]="step==numSteps-1" class="btn btn-secondary btn-lg forward"  (click)="move(1)" [disabled]="formGroup ? !formGroup.valid : true">
+	<button [hidden]="step==numSteps-1" class="btn btn-secondary btn-lg forward"  (click)="move(1)" [disabled]="!(formGroup?.valid)">
 		NEXT
 	</button>
-	<button [hidden]="step<numSteps-1" class="btn btn-primary btn-lg forward"  (click)="submit()" [disabled]="formGroup ? !formGroup.valid : true">
+	<button [hidden]="step<numSteps-1" class="btn btn-primary btn-lg forward"  (click)="submit()" [disabled]="!(formGroup?.valid)">
 	SUBMIT
 	</button>
 	<br>

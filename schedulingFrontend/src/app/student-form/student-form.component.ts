@@ -16,7 +16,7 @@ export class StudentFormComponent implements AfterViewInit {
 	// @ViewChild(FormBaseComponent) f;
 	student: Student;
 
-  constructor(private studentFormService: StudentFormService) {
+  constructor(public studentFormService: StudentFormService) {
   	this.student = this.studentFormService.student;
   }
 
