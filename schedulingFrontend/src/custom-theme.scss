@@ -12,11 +12,19 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$schedulingFrontend-primary: mat-palette($mat-indigo);
-$schedulingFrontend-accent: mat-palette($mat-pink, A200, A100, A400);
 
-// The warn palette is optional (defaults to red).
+
+$schedulingFrontend-primary: mat-palette($mat-brown,500);
+$schedulingFrontend-accent: mat-palette($mat-orange, 100, 100, 100);
 $schedulingFrontend-warn: mat-palette($mat-red);
+
+
+
+
+
+
+
+
 
 // Create the theme object (a Sass map containing all of the palettes).
 $schedulingFrontend-theme: mat-light-theme($schedulingFrontend-primary, $schedulingFrontend-accent, $schedulingFrontend-warn);

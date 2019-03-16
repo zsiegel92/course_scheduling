@@ -7,11 +7,20 @@
 */
 /*@import '~bootstrap/dist/css/bootstrap.min.css';*/
 /*@import '~font-awesome/css/font-awesome.min.css';*/
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+/*@import "~@angular/material/prebuilt-themes/indigo-pink.css";*/
 
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/*.dark-primary-color    { background: #5D4037; }
+.default-primary-color { background: #795548; }
+.light-primary-color   { background: #D7CCC8; }
+.text-primary-color    { color: #FFFFFF; }
+.accent-color          { background: #607D8B; }
+.primary-text-color    { color: #212121; }
+.secondary-text-color  { color: #757575; }
+.divider-color         { border-color: #BDBDBD; }*/
 
 
 /*body {

@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class StudentFormService implements FormService {
     public student: Student;
     public formName: string = "StudentForm";
-    basicForm: FormGroup;
+    // basicForm: FormGroup;
     // public interests: Skill[] = [];
   	submit(){
       this.router.navigate(['/submitted']);
@@ -23,15 +23,11 @@ export class StudentFormService implements FormService {
       }
     }
 
-    getForm(){
-      this.basicForm = this.formBuilder.group({
-        first: ['', Validators.required],
-        last: ['', Validators.required],
-        email: ['', Validators.required]
-      });
-      return this.basicForm;
-    }
-    constructor(private dataService: DataService,private router: Router,private formBuilder: FormBuilder) {
+    // getForm(){
+
+    //   return this.basicForm;
+    // }
+    constructor(private dataService: DataService,private router: Router) {
       this.student = new Student();
       this.setSkills();
     	// this.getSchools();

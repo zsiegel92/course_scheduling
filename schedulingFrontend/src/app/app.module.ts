@@ -18,9 +18,10 @@ import { MessageWriterComponent } from './message-writer/message-writer.componen
 import { FormPageComponent } from './form-page/form-page.component';
 // import { FormBaseComponent } from './form-base/form-base.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatStepperModule, MatInputModule, MatButtonModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule} from '@angular/material';
+import {MatStepperModule, MatInputModule, MatButtonModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatSelectModule, MatRadioModule, MatCardModule} from '@angular/material';
 import { NavComponentComponent } from './nav-component/nav-component.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { AddressFormComponent } from './address-form/address-form.component';
 // import { StudentForm1Component } from './student-form-1/student-form-1.component';
 // import { FormVenueComponent } from './form-venue/form-venue.component';
 // import { FormDateComponent } from './form-date/form-date.component';
@@ -37,6 +38,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     MessageWriterComponent,
     FormPageComponent,
     NavComponentComponent,
+    AddressFormComponent,
     // FormBaseComponent,
     // StudentForm1Component
   ],
@@ -48,7 +50,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatStepperModule, MatInputModule, MatButtonModule, LayoutModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule,
+    MatStepperModule, MatInputModule, MatButtonModule, LayoutModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatSelectModule, MatRadioModule, MatCardModule,
   ],
   providers: [DataService, MessageService,StudentFormService,],
   bootstrap: [AppComponent]

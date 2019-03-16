@@ -1,13 +1,32 @@
-Please fill in the information below to help Course Scheduling Automation plan and schedule course offerings.
-<br>
-Please submit by March 20, 2019.
-<br>
-<p>
-For assistance submitting this information, please contact zs@gmail.com</p>
-<br>
+<p>Please fill in the information below to help Course Scheduling Automation plan and schedule course offerings.</p>
+<p>Please submit by March 20, 2019.</p>
+<p>For assistance submitting this information, please contact zs@gmail.com</p>
 
-student: {{student | json }}
+<div #testing>
+  <h3>TESTS <button mat-button (click)="tests.hidden = !tests.hidden">{{tests.hidden? "SHOW" : "HIDE"}} TESTS</button></h3>
+  <div #tests hidden="true">
+    <!-- student: {{student | json }} -->
+      <br>
+      basicForm.controls:
+       <!-- <div *ngFor="let field of basicForm.controls.email | keyvalue">
+          {{field.key}}: {{field.value}}
+        </div>
+        <div *ngIf="basicForm.controls.email.invalid">
+          EMAIL IS INVALID
+        </div> -->
+        <ul>
+          <li *ngFor="let field of basicForm.controls | keyvalue">
+             {{field.key}}: {{field.value.value}} <button mat-button (click)="subFields.hidden = !subFields.hidden">Show More"</button>
+             <ul #subFields hidden="true">
+               <li *ngFor="let subField of field.value | keyvalue">
+                 {{subField.key}} : {{subField.value }}
+               </li>
+             </ul>
+           </li>
+        </ul>
 
+  </div>
+</div>
 
 <mat-horizontal-stepper [linear]="true" #stepper>
 
@@ -15,16 +34,73 @@ student: {{student | json }}
     <form [formGroup]="basicForm">
       <ng-template matStepLabel>Basic Information</ng-template>
       <mat-form-field>
-        <input matInput placeholder="Student's First Name" formControlName="first" >
+        <input matInput placeholder="Student's First Name" formControlName="first" required>
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput placeholder="Last Name" formControlName="last">
+        <input matInput placeholder="Last Name" formControlName="last" required>
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput type="email" formControlName="email" placeholder="<address>@<domain>.<extension>" autocomplete='email' email>
+        <input matInput type="email" formControlName="email" placeholder="Email Address" autocomplete='email' email required>
+        <mat-error>Enter a valid email address (address@domain)</mat-error>
       </mat-form-field>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Address" formControlName="address"></textarea>
+            <mat-error>
+              Address is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row" *ngIf="!hasUnitNumber">
+        <div class="col">
+          <button mat-button type="button" (click)="hasUnitNumber = !hasUnitNumber">
+            + Add C/O, Apt, Suite, Unit
+          </button>
+        </div>
+      </div>
+      <div class="row" *ngIf="hasUnitNumber">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Address 2" formControlName="address2"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="City" formControlName="city">
+            <mat-error>
+              City is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="State" formControlName="state">
+              <mat-option *ngFor="let state of states" [value]="state.abbreviation">
+                {{ state.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error >
+              State is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput #postalCode maxlength="5" placeholder="Postal Code" type="number" formControlName="postalCode">
+            <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+
       <div>
         <button mat-button matStepperNext>Next</button>
       </div>
