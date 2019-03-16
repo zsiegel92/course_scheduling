@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, NgForm }   from '@angular/forms';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule,NgForm }   from '@angular/forms';
+// import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,7 +16,11 @@ import { StudentFormService } from './student-form.service';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageWriterComponent } from './message-writer/message-writer.component';
 import { FormPageComponent } from './form-page/form-page.component';
-import { FormBaseComponent } from './form-base/form-base.component';
+// import { FormBaseComponent } from './form-base/form-base.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatStepperModule, MatInputModule, MatButtonModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule} from '@angular/material';
+import { NavComponentComponent } from './nav-component/nav-component.component';
+import { LayoutModule } from '@angular/cdk/layout';
 // import { StudentForm1Component } from './student-form-1/student-form-1.component';
 // import { FormVenueComponent } from './form-venue/form-venue.component';
 // import { FormDateComponent } from './form-date/form-date.component';
@@ -32,15 +36,19 @@ import { FormBaseComponent } from './form-base/form-base.component';
     MessagesComponent,
     MessageWriterComponent,
     FormPageComponent,
-    FormBaseComponent,
+    NavComponentComponent,
+    // FormBaseComponent,
     // StudentForm1Component
   ],
   imports: [
-		NgbModule,
-  	FormsModule,
+		// NgbModule,
   	// HttpClientModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatStepperModule, MatInputModule, MatButtonModule, LayoutModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule,
   ],
   providers: [DataService, MessageService,StudentFormService,],
   bootstrap: [AppComponent]

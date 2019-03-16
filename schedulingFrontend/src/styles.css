@@ -5,10 +5,16 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 */
-@import '~bootstrap/dist/css/bootstrap.min.css';
-@import '~font-awesome/css/font-awesome.min.css';
+/*@import '~bootstrap/dist/css/bootstrap.min.css';*/
+/*@import '~font-awesome/css/font-awesome.min.css';*/
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-body {
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/*body {
   margin: 2em;
   background-color: #e0ddd0;
   color: #4a567a;
@@ -22,7 +28,6 @@ h1 {
 h2, h3 {
   color: #444;
   font-family: Arial, Helvetica, sans-serif;
-  /*font-weight: lighter;*/
 }
 
 hr {
@@ -47,17 +52,13 @@ input[text], button {
 }
 
 .ng-valid[required], .ng-valid.required  {
-  border-left: 5px solid #42A948; /* green */
+  border-left: 5px solid #42A948;
 }
 
 .ng-invalid:not(form):not(div) {
-  border-left: 5px solid #a94442; /* red */
+  border-left: 5px solid #a94442;
 }
 
-
-ngb-datepicker {
-	background-color: #faf9f5;
-}
 
 .form-component {
 	background-color: #f8f7f0;
@@ -85,3 +86,6 @@ ngb-datepicker {
 	}
 
 }
+
+
+*/

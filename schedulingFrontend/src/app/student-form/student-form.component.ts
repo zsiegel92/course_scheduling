@@ -5,40 +5,37 @@ import { StudentFormService } from '../student-form.service';
 // import { MessageService } from '../message.service';
 // import { StudentForm1Component } from '../student-form-1/student-form-1.component';
 import { Student } from '../student';
-import { FormBaseComponent } from '../form-base/form-base.component';
+// import { FormBaseComponent } from '../form-base/form-base.component';
 import { Skill } from '../skill';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-
+// import {MatStepperModule} from '@angular/material/stepper';
 @Component({
   selector: 'app-student-form',
   templateUrl: './student-form.component.html',
   styleUrls: ['./student-form.component.css']
 })
-export class StudentFormComponent implements AfterViewInit {
-	// @ViewChild(FormBaseComponent) f;
+export class StudentFormComponent implements OnInit {
+
 	student: Student;
-	interests: Skill[]=[];
+  basicForm: FormGroup;
+  interestForm: FormGroup;
 
-
-	// toggleSkill(interest: Skill){
-	// 	if (this.student.interests.some(e => ((e.name == interest.name) && (e.id == interest.id)))){
-	// 		var index = this.student.interests.indexOf(interest);
-	// 		this.student.interests.splice(index, 1);
-	// 	}
-	// 	else {
-	// 		this.student.interests.push(interest);
-	// 	}
-	// }
-  constructor(public studentFormService: StudentFormService) {
+  constructor(public studentFormService: StudentFormService,private formBuilder: FormBuilder) {
   	this.student = this.studentFormService.student;
-  	this. interests = this.studentFormService.interests;
-  	for (let interest of this.interests){
-  		// this.student.interests[interest]=false;
-  	}
+  }
+  ngOnInit(){
 
+  	this.basicForm = this.studentFormService.getForm();
+  	// this.basicForm = this.formBuilder.group({
+  	//   first: ['', Validators.required],
+  	//   last: ['', Validators.required],
+  	//   email: ['', Validators.required]
+  	// });
+  	this.interestForm = this.formBuilder.group({
+  	  secondCtrl: ['', Validators.required]
+  	});
   }
 
-  ngAfterViewInit() {
-  }
 
 }

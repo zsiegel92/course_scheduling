@@ -1,0 +1,67 @@
+<div class='testing'>
+	<h3>TESTING STUDENT FORM</h3>
+	student: {{student | json}}
+	student.interests: {{student.interests | json}}
+	<br>
+	<!-- page: {{comp}} -->
+</div>
+<app-form-base top-text="Please fill in the information below to help Course Scheduling Automation plan and schedule course offerings.
+	Please submit by March 20, 2019." contact-email="zs@gmail.com" [form-service]="studentFormService">
+	<form #f="ngForm">
+		<div #page ngModelGroup="basic" >
+				<h3>Basic Information</h3>
+				<div class="form-row">
+					<div class="col">
+						<label for="first"><b>Student's First Name</b></label>
+						<input required type="text" name="first" class="form-control" [(ngModel)]="student.first" #first="ngModel" placeholder="First name">
+						<div [hidden]="first.valid || first.pristine" class="alert alert-danger">
+							Please enter a first name.
+						</div>
+					</div>
+
+					<div class="col">
+						<label for="last"><b>Student's Last Name</b></label>
+						<input required type="text" name="last" class="form-control" [(ngModel)]="student.last" #last="ngModel" placeholder="Last name">
+						<div [hidden]="last.valid || last.pristine" class="alert alert-danger">
+							Please enter a last name.
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="email"><b>Email Address</b></label>
+					<input required type="email" name="email" class="form-control" [(ngModel)]="student.email" #email="ngModel" placeholder="<address>@<domain>.<extension>" autocomplete='email' email>
+					<div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+						Please enter a valid email address.
+					</div>
+				</div> <!-- form-group -->
+
+
+				<div class="form-group">
+					<label for="address"><b>Address</b></label>
+					<input required type="text" name="address" class="form-control" [(ngModel)]="student.address" #address="ngModel" placeholder="1000 Washington Pl.">
+					<div [hidden]="address.valid || address.pristine" class="alert alert-danger">
+						Please enter an address.
+					</div>
+				</div>
+
+			</div> <!-- step -->
+
+			<div #page ngModelGroup="interests">
+				{{student.interests | json}}
+				FIX THIS MAKE BINDING WORK PROPERLY, ADD T/F ON ALL STUDENT INTEREST FIELDS
+				<h3>Interests</h3>
+				<div class="form-group">
+					<div class="formrow" *ngFor="let interest of student.interests">
+						<label [for]="interest.name" class="checklabel"><b>{{interest.name}}</b></label>
+						<input required type="checkbox" [name]="interest.name" class="form-control" [(ngModel)]="interest.has_interest">
+					</div>
+				</div>
+			</div> <!-- step -->
+
+			<div #page ngModelGroup="courses">
+				FORM PAGE 2
+
+			</div> <!-- step -->
+	</form>
+</app-form-base>

@@ -10,7 +10,7 @@ export class Student {
   phone: string;
   prefs: any[];
   skills: Skill[] = [];
-  interests = {};
+  interests: Skill[] =[];
 
 
   constructor(){
