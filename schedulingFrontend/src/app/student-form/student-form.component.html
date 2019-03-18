@@ -46,6 +46,11 @@
         <mat-error>Enter a valid email address (address@domain)</mat-error>
       </mat-form-field>
 
+      <mat-form-field>
+        <input matInput placeholder="Phone Number" formControlName="phone" size="15" required>
+        <mat-error>Enter a valid phone number, eg (999)999-9999</mat-error>
+      </mat-form-field>
+
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
@@ -95,8 +100,8 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput #postalCode maxlength="5" placeholder="Postal Code" type="number" formControlName="postalCode">
-            <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+            <input matInput #zip maxlength="5" placeholder="Zip Code" type="number" formControlName="zip">
+            <mat-hint align="end">{{zip.value.length}} / 5</mat-hint>
           </mat-form-field>
         </div>
       </div>
