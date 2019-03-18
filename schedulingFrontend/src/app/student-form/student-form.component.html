@@ -3,32 +3,26 @@
 <p>For assistance submitting this information, please contact zs@gmail.com</p>
 
 <div #testing>
-  <h3>TESTS <button mat-button (click)="tests.hidden = !tests.hidden">{{tests.hidden? "SHOW" : "HIDE"}} TESTS</button></h3>
+  <button mat-button (click)="tests.hidden = !tests.hidden">{{tests.hidden? "SHOW" : "HIDE"}} TESTS</button>
+  <button mat-button (click)="stepper.linear=false; stepper.previous(); stepper.linear=true;">BACK</button>
+  <button mat-button (click)="stepper.linear=false; stepper.next(); stepper.linear=true;">NEXT</button>
   <div #tests hidden="true">
     <!-- student: {{student | json }} -->
       <br>
-      basicForm.controls:
-       <!-- <div *ngFor="let field of basicForm.controls.email | keyvalue">
-          {{field.key}}: {{field.value}}
-        </div>
-        <div *ngIf="basicForm.controls.email.invalid">
-          EMAIL IS INVALID
-        </div> -->
-        <ul>
-          <li *ngFor="let field of basicForm.controls | keyvalue">
-             {{field.key}}: {{field.value.value}} <button mat-button (click)="subFields.hidden = !subFields.hidden">Show More"</button>
-             <ul #subFields hidden="true">
-               <li *ngFor="let subField of field.value | keyvalue">
-                 {{subField.key}} : {{subField.value }}
-               </li>
-             </ul>
-           </li>
-        </ul>
-
+      basicForm: <app-form-group-display [form-group]="basicForm"></app-form-group-display>
+      <br>
+      interestForm: <app-form-group-display [form-group]="interestForm"></app-form-group-display>
+      <div>
+        <button mat-button (click)="tests.hidden = !tests.hidden">{{tests.hidden? "SHOW" : "HIDE"}} TESTS</button>
+        <button mat-button (click)="stepper.linear=false; stepper.previous(); stepper.linear=true;">BACK</button>
+        <button mat-button (click)="stepper.linear=false; stepper.next(); stepper.linear=true;">NEXT</button>
+      </div>
   </div>
 </div>
 
-<mat-horizontal-stepper [linear]="true" #stepper>
+
+
+<mat-horizontal-stepper editable="true" linear="true" #stepper>
 
   <mat-step [stepControl]="basicForm">
     <form [formGroup]="basicForm">
@@ -42,19 +36,20 @@
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput type="email" formControlName="email" placeholder="Email Address" autocomplete='email' email required>
+        <input matInput type="email" formControlName="email" placeholder="Email Address" autocomplete='email' required>
         <mat-error>Enter a valid email address (address@domain)</mat-error>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Phone Number" formControlName="phone" size="15" required>
+        <span matPrefix>+1 &nbsp;</span>
+        <input matInput placeholder="Phone Number" formControlName="phone" size="15" type="tel" required>
         <mat-error>Enter a valid phone number, eg (999)999-9999</mat-error>
       </mat-form-field>
 
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <textarea matInput placeholder="Address" formControlName="address"></textarea>
+            <textarea matInput placeholder="Address" formControlName="address" required></textarea>
             <mat-error>
               Address is <strong>required</strong>
             </mat-error>
@@ -78,7 +73,7 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="City" formControlName="city">
+            <input matInput placeholder="City" formControlName="city" required>
             <mat-error>
               City is <strong>required</strong>
             </mat-error>
@@ -86,7 +81,7 @@
         </div>
         <div class="col">
           <mat-form-field class="full-width">
-            <mat-select placeholder="State" formControlName="state">
+            <mat-select placeholder="State" formControlName="state" required>
               <mat-option *ngFor="let state of states" [value]="state.abbreviation">
                 {{ state.name }}
               </mat-option>
@@ -96,16 +91,14 @@
             </mat-error>
           </mat-form-field>
         </div>
-      </div>
-      <div class="row">
         <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput #zip maxlength="5" placeholder="Zip Code" type="number" formControlName="zip">
+          <mat-form-field class="full-width"><!-- size="5"   -->
+            <input matInput #zip placeholder="Zip Code"  maxlength="5" minlength="5" formControlName="zip" type="text"inputmode=”numeric”  required >
             <mat-hint align="end">{{zip.value.length}} / 5</mat-hint>
+            <mat-error align="end" *ngIf="zip.value.length < 5">{{zip.value.length}} / 5</mat-error>
           </mat-form-field>
         </div>
       </div>
-
       <div>
         <button mat-button matStepperNext>Next</button>
       </div>
@@ -114,12 +107,19 @@
 
 
   <mat-step [stepControl]="interestForm">
+    <ng-template matStepLabel>What skills interest you?</ng-template>
     <form [formGroup]="interestForm">
-      <ng-template matStepLabel>Fill out your address</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="Address" formControlName="secondCtrl" required>
-      </mat-form-field>
 
+      <mat-selection-list #interestSelector formControlName="preferences">
+        <div *ngFor="let interest of interests">
+          <mat-list-option [value]="interest">
+            {{interest.name}}
+          </mat-list-option>
+        </div>
+      </mat-selection-list>
+      <p>
+        Options selected: {{interestSelector.selectedOptions.selected.length}}
+      </p>
 
       <div>
         <button mat-button matStepperPrevious>Back</button>
@@ -135,13 +135,8 @@
 
 
     <div>
-      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.linear=false; stepper.previous(); stepper.linear=true;" matStepperPrevious>Back</button>
       <button mat-button (click)="stepper.reset()">Reset</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>
-
-
-<!-- Copyright 2019 Google Inc. All Rights Reserved.
-    Use of this source code is governed by an MIT-style license that
-    can be found in the LICENSE file at http://angular.io/license -->

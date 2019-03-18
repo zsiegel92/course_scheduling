@@ -1,9 +1,9 @@
 import { Skill } from './skill';
-import {BasicInfo} from './basic-info'
+// import {BasicInfo} from './basic-info'
 
 export class Student {
   id: number = -1;
-  basicInfo: BasicInfo;
+  // basicInfo: BasicInfo;
   // first: string = '';
   // last: string = '';
   // email: string = '';

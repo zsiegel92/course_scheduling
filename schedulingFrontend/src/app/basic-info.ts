@@ -1,6 +1,20 @@
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 
-export class BasicInfo {
+// export function integer(): ValidatorFn {
+//   return (control: AbstractControl): ValidationErrors | null => {
+//     const error: ValidationErrors = { integer: true };
+
+//     if (control.value && control.value !== `${parseInt(control.value, 10)}`) {
+//       control.setErrors(error);
+//       return error;
+//     }
+
+//     control.setErrors(null);
+//     return null;
+//   };
+// }
+
+class BasicInfo {
 
 	phone= ['', Validators.compose([
   Validators.required, Validators.minLength(10), Validators.maxLength(15)])];
@@ -19,14 +33,24 @@ export class BasicInfo {
 	address2= '';
 	city= ['', Validators.required];
 	state= ['', Validators.required];
-	zip= ['', Validators.compose([
-		Validators.required, Validators.minLength(5), Validators.maxLength(5)])
-	];
-
-	constructor(){
+	zip= ['',
+	Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(5)])
+		];
 
 	}
+
+
+
+export function makeBasicForm(): FormGroup{
+	let bi = new BasicInfo();
+	let fb = new FormBuilder();
+	return fb.group(bi);
 }
+
+
+// export var basicForm: FormGroup = makeBasicForm();
+
+
 
 export const States = [
 	{name: 'Alabama', abbreviation: 'AL'},

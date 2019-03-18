@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatStepperModule, MatInputModule, MatButtonModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatSelectModule, MatRadioModule, MatCardModule} from '@angular/material';
 import { NavComponentComponent } from './nav-component/nav-component.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { FormGroupDisplayComponent } from './form-group-display/form-group-display.component';
 // import { AddressFormComponent } from './address-form/address-form.component';
 // import { StudentForm1Component } from './student-form-1/student-form-1.component';
 // import { FormVenueComponent } from './form-venue/form-venue.component';
@@ -38,6 +39,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     MessageWriterComponent,
     FormPageComponent,
     NavComponentComponent,
+    FormGroupDisplayComponent
     // AddressFormComponent,
     // FormBaseComponent,
     // StudentForm1Component
