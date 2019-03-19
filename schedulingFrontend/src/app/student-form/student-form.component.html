@@ -4,6 +4,7 @@
 
 <div #testing>
   <button mat-button (click)="tests.hidden = !tests.hidden">{{tests.hidden? "SHOW" : "HIDE"}} TESTS</button>
+  <button mat-button (click)="submit();">SUBMIT</button>
   <button mat-button (click)="stepper.linear=false; stepper.previous(); stepper.linear=true;">BACK</button>
   <button mat-button (click)="stepper.linear=false; stepper.next(); stepper.linear=true;">NEXT</button>
   <div #tests hidden="true">
@@ -14,6 +15,7 @@
       interestForm: <app-form-group-display [form-group]="interestForm"></app-form-group-display>
       <div>
         <button mat-button (click)="tests.hidden = !tests.hidden">{{tests.hidden? "SHOW" : "HIDE"}} TESTS</button>
+        <button mat-button (click)="submit();">SUBMIT</button>
         <button mat-button (click)="stepper.linear=false; stepper.previous(); stepper.linear=true;">BACK</button>
         <button mat-button (click)="stepper.linear=false; stepper.next(); stepper.linear=true;">NEXT</button>
       </div>
@@ -120,6 +122,10 @@
       <p>
         Options selected: {{interestSelector.selectedOptions.selected.length}}
       </p>
+
+
+
+
 
       <div>
         <button mat-button matStepperPrevious>Back</button>

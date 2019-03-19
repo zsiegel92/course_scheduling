@@ -7,12 +7,12 @@ import { MessageService } from '../message.service';
   styleUrls: ['./message-writer.component.css']
 })
 export class MessageWriterComponent implements OnInit {
-	message: string;
-	messages: string[] = [];
+	// message: string;
+	// messages: string[] = [];
   constructor(public messageService: MessageService) { }
 
   ngOnInit() {
-  	this.messages = this.messageService.messages;
+  	// this.messages = this.messageService.messages;
   }
 
 }

@@ -2,12 +2,15 @@ import { Injectable, /*OnInit*/ } from '@angular/core';
 
 import { DataService } from './data.service';
 // import { Student } from './student';
+import { BasicInfo, States } from './basic-info';
 import { Skill } from './skill';
+import { Course } from './course';
+import {MessageService } from './message.service';
 import { FormService } from './form.service';
 import {FormBuilder, FormControl, FormGroup,FormArray, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Router } from '@angular/router';
 
-
+import { randomlySelectKIndices,randomlySelectK, randInt} from './random-functions/random-functions.module'; //ONLY FOR TESTING
 
 
 @Injectable({
@@ -18,11 +21,33 @@ export class StudentFormService implements FormService {
     public formName: string = "StudentForm";
     // basicForm: FormGroup;
     public interests: Skill[] = [];
-  	submit(){
-      this.router.navigate(['/submitted']);
+    public courses: Course[] = [];
+    public forms: any = {};
+
+    say(message: any){
+      this.messageService.add(message);
+    }
+    sayJSON(message: any){
+      this.messageService.add(JSON.stringify(message));
+    }
+    constructor(private dataService: DataService,private router: Router,private fb: FormBuilder,private messageService: MessageService) {
+      // this.student = new Student();
+      this.setInterests();
+      this.setCourses();
+      this.messageService
+      for (let course of this.courses) {
+        this.sayJSON(course);
+      }
+    }
+
+  	submit():void{
+      let bi = new BasicInfo();
+      bi.setFromFormGroup(this.forms['basicForm']);
+      this.sayJSON(bi);
+      // this.router.navigate(['/submitted']);
   	}
     setInterests() {
-      for (let s of ["Web Development","Data Science","Art"]){
+      for (let s of ["Web Development","Data Science","Art","Windows/Mac","Photography","Mathematics"]){
         this.interests.push(new Skill(s));
       }
     }
@@ -30,109 +55,43 @@ export class StudentFormService implements FormService {
       return this.interests;
     }
 
-    // getForm(){
+    setCourses() {
+      let id: string;
+      let name: string;
+      let desc: string;
+      let min_age: number;
+      let max_age: number;
+      let skills: Skill[];
+      this.courses = [];
+      for (let name of ["Databases for Dummies","Basic CRUD App","PhotoShop for Pros","Building a Raspberry Pi"]){
+        id = String(-1);
+        desc = "A course involving " + name;
+        min_age = randInt(5,20);
+        max_age = randInt(min_age,20);
+        skills = randomlySelectK(3, this.interests);
+        this.courses.push(new Course(id,name,desc,min_age,max_age,skills));
+      }
+    }
 
-    //   return this.basicForm;
-    // }
-    constructor(private dataService: DataService,private router: Router,private fb: FormBuilder) {
-      // this.student = new Student();
-      this.setInterests();
+    getCourses(){
+      return this.courses;
+    }
+
+    getLastForm(){
+      return this.forms[this.forms.length-1];
     }
     makeBasicForm(): FormGroup{
       let bi = new BasicInfo();
-      return this.fb.group(bi);
+      this.forms['basicForm']= this.fb.group(bi.json());
+      return this.forms['basicForm'];
     }
 
     makeInterestForm(): FormGroup {
-      // let preferences = new FormArray([]);
-      // this.interests.map((o, i) => {
-      //       const control = new FormControl(0); // if first item set to true, else false
-      //       (preferences as FormArray).push(control);
-      //     });
-      return this.fb.group({preferences: new FormControl([])});
+      this.forms['interestForm'] = this.fb.group({preferences: new FormControl([])})
+      return this.forms['interestForm'];
+    }
+    getStates() : any[]{
+      return States;
     }
 
-    // ngOnInit(){}
 }
-
-
-class BasicInfo {
-  phone= ['', Validators.compose([
-  Validators.required, Validators.minLength(10), Validators.maxLength(15)])];
-  first = ['', Validators.required];
-  last =  ['', Validators.required];
-  email= ['', Validators.required];
-  address= ['', Validators.required];
-  address2= '';
-  city= ['', Validators.required];
-  state= ['', Validators.required];
-  zip= [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(5), Validators.pattern("[0-9]*")])
-    ];
-
-  }
-
-
-
-export const States = [
-  {name: 'Alabama', abbreviation: 'AL'},
-  {name: 'Alaska', abbreviation: 'AK'},
-  {name: 'American Samoa', abbreviation: 'AS'},
-  {name: 'Arizona', abbreviation: 'AZ'},
-  {name: 'Arkansas', abbreviation: 'AR'},
-  {name: 'California', abbreviation: 'CA'},
-  {name: 'Colorado', abbreviation: 'CO'},
-  {name: 'Connecticut', abbreviation: 'CT'},
-  {name: 'Delaware', abbreviation: 'DE'},
-  {name: 'District Of Columbia', abbreviation: 'DC'},
-  {name: 'Federated States Of Micronesia', abbreviation: 'FM'},
-  {name: 'Florida', abbreviation: 'FL'},
-  {name: 'Georgia', abbreviation: 'GA'},
-  {name: 'Guam', abbreviation: 'GU'},
-  {name: 'Hawaii', abbreviation: 'HI'},
-  {name: 'Idaho', abbreviation: 'ID'},
-  {name: 'Illinois', abbreviation: 'IL'},
-  {name: 'Indiana', abbreviation: 'IN'},
-  {name: 'Iowa', abbreviation: 'IA'},
-  {name: 'Kansas', abbreviation: 'KS'},
-  {name: 'Kentucky', abbreviation: 'KY'},
-  {name: 'Louisiana', abbreviation: 'LA'},
-  {name: 'Maine', abbreviation: 'ME'},
-  {name: 'Marshall Islands', abbreviation: 'MH'},
-  {name: 'Maryland', abbreviation: 'MD'},
-  {name: 'Massachusetts', abbreviation: 'MA'},
-  {name: 'Michigan', abbreviation: 'MI'},
-  {name: 'Minnesota', abbreviation: 'MN'},
-  {name: 'Mississippi', abbreviation: 'MS'},
-  {name: 'Missouri', abbreviation: 'MO'},
-  {name: 'Montana', abbreviation: 'MT'},
-  {name: 'Nebraska', abbreviation: 'NE'},
-  {name: 'Nevada', abbreviation: 'NV'},
-  {name: 'New Hampshire', abbreviation: 'NH'},
-  {name: 'New Jersey', abbreviation: 'NJ'},
-  {name: 'New Mexico', abbreviation: 'NM'},
-  {name: 'New York', abbreviation: 'NY'},
-  {name: 'North Carolina', abbreviation: 'NC'},
-  {name: 'North Dakota', abbreviation: 'ND'},
-  {name: 'Northern Mariana Islands', abbreviation: 'MP'},
-  {name: 'Ohio', abbreviation: 'OH'},
-  {name: 'Oklahoma', abbreviation: 'OK'},
-  {name: 'Oregon', abbreviation: 'OR'},
-  {name: 'Palau', abbreviation: 'PW'},
-  {name: 'Pennsylvania', abbreviation: 'PA'},
-  {name: 'Puerto Rico', abbreviation: 'PR'},
-  {name: 'Rhode Island', abbreviation: 'RI'},
-  {name: 'South Carolina', abbreviation: 'SC'},
-  {name: 'South Dakota', abbreviation: 'SD'},
-  {name: 'Tennessee', abbreviation: 'TN'},
-  {name: 'Texas', abbreviation: 'TX'},
-  {name: 'Utah', abbreviation: 'UT'},
-  {name: 'Vermont', abbreviation: 'VT'},
-  {name: 'Virgin Islands', abbreviation: 'VI'},
-  {name: 'Virginia', abbreviation: 'VA'},
-  {name: 'Washington', abbreviation: 'WA'},
-  {name: 'West Virginia', abbreviation: 'WV'},
-  {name: 'Wisconsin', abbreviation: 'WI'},
-  {name: 'Wyoming', abbreviation: 'WY'}
-];
-
-

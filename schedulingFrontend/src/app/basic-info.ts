@@ -1,55 +1,40 @@
-import {FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
-
-// export function integer(): ValidatorFn {
-//   return (control: AbstractControl): ValidationErrors | null => {
-//     const error: ValidationErrors = { integer: true };
-
-//     if (control.value && control.value !== `${parseInt(control.value, 10)}`) {
-//       control.setErrors(error);
-//       return error;
-//     }
-
-//     control.setErrors(null);
-//     return null;
-//   };
-// }
-
-class BasicInfo {
-
-	phone= ['', Validators.compose([
-  Validators.required, Validators.minLength(10), Validators.maxLength(15)])];
-	// phone=  {
-	// 	'phone1': ['', Validators.compose([
-	// 	Validators.required, Validators.minLength(3), Validators.maxLength(3)])],
-	// 	'phone2': ['', Validators.compose([
-	// 	Validators.required, Validators.minLength(3), Validators.maxLength(3)])],
-	// 	'phone3': ['', Validators.compose([
-	// 	Validators.required, Validators.minLength(4), Validators.maxLength(4)])]
-	// };
-	first = ['', Validators.required];
-	last =  ['', Validators.required];
-	email= ['', Validators.required];
-	address= ['', Validators.required];
-	address2= '';
-	city= ['', Validators.required];
-	state= ['', Validators.required];
-	zip= ['',
-	Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(5)])
-		];
-
-	}
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 
+export class BasicInfo {
+  phone= '';
+  first = '';
+  last = '';
+  email= '';
+  address='';
+  address2= '';
+  city= '';
+  state='';
+  zip= '';
 
-export function makeBasicForm(): FormGroup{
-	let bi = new BasicInfo();
-	let fb = new FormBuilder();
-	return fb.group(bi);
+  setFromFormGroup(formGroup: FormGroup):void{
+  	for (let field in formGroup.controls){
+  		this[field] = formGroup.controls[field].value;
+  		console.log("this." + field + ": " + this[field]);
+  	}
+  }
+  constructor(){
+
+  }
+  sayJson(){
+  	console.log(JSON.stringify(this));
+  }
+  json():any{
+  	let json:any = JSON.parse(JSON.stringify(this));
+  	for (let field in json){
+  		json[field] = [json[field],Validators.required];
+  	}
+  	json['phone'][1]=Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(15)]);
+  	json['address2'] = json['address2'][0];
+  	json['zip'][1] = Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(5), Validators.pattern("[0-9]*")]);
+  	return json;
+  }
 }
-
-
-// export var basicForm: FormGroup = makeBasicForm();
-
 
 
 export const States = [
