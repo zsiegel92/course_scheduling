@@ -9,4 +9,5 @@ export class Skill {
 		this.name=name;
 		// this.has_interest=has_interest;
 	}
+
 }

@@ -38,6 +38,18 @@ export class StudentFormComponent implements OnInit {
   	this.basicForm = studentFormService.makeBasicForm();
   	this.interestForm = this.studentFormService.makeInterestForm();
   }
+  say(message:any){
+  	this.studentFormService.say(message);
+  }
+  removeInterest(interest:Skill){
+  	let vals = this.interestForm.controls.preferences.value;
+  	let index = vals.findIndex(other_interest => (other_interest== interest));
+  	vals.splice(index,1);
+  	this.interestForm.controls.preferences.setValue(vals);
+  }
+  // addMe(course:any){
+
+  // }
   ngOnInit(){
   }
 

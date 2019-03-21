@@ -42,7 +42,7 @@ export class StudentFormService implements FormService {
 
   	submit():void{
       let bi = new BasicInfo();
-      bi.setFromFormGroup(this.forms['basicForm']);
+      bi.fromFormGroup(this.forms['basic']);
       this.sayJSON(bi);
       // this.router.navigate(['/submitted']);
   	}
@@ -68,7 +68,7 @@ export class StudentFormService implements FormService {
         desc = "A course involving " + name;
         min_age = randInt(5,20);
         max_age = randInt(min_age,20);
-        skills = randomlySelectK(3, this.interests);
+        skills = randomlySelectK(randInt(0,this.interests.length-1), this.interests);
         this.courses.push(new Course(id,name,desc,min_age,max_age,skills));
       }
     }
@@ -82,13 +82,13 @@ export class StudentFormService implements FormService {
     }
     makeBasicForm(): FormGroup{
       let bi = new BasicInfo();
-      this.forms['basicForm']= this.fb.group(bi.json());
-      return this.forms['basicForm'];
+      this.forms['basic']= bi.toFormGroup();
+      return this.forms['basic'];
     }
 
     makeInterestForm(): FormGroup {
-      this.forms['interestForm'] = this.fb.group({preferences: new FormControl([])})
-      return this.forms['interestForm'];
+      this.forms['interest'] = this.fb.group({preferences: new FormControl([])})
+      return this.forms['interest'];
     }
     getStates() : any[]{
       return States;

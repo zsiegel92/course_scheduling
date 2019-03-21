@@ -12,7 +12,7 @@ export class BasicInfo {
   state='';
   zip= '';
 
-  setFromFormGroup(formGroup: FormGroup):void{
+  fromFormGroup(formGroup: FormGroup):void{
   	for (let field in formGroup.controls){
   		this[field] = formGroup.controls[field].value;
   		console.log("this." + field + ": " + this[field]);
@@ -21,10 +21,9 @@ export class BasicInfo {
   constructor(){
 
   }
-  sayJson(){
-  	console.log(JSON.stringify(this));
-  }
-  json():any{
+
+  toFormGroup():FormGroup{
+  	let fb = new FormBuilder();
   	let json:any = JSON.parse(JSON.stringify(this));
   	for (let field in json){
   		json[field] = [json[field],Validators.required];
@@ -32,7 +31,7 @@ export class BasicInfo {
   	json['phone'][1]=Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(15)]);
   	json['address2'] = json['address2'][0];
   	json['zip'][1] = Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(5), Validators.pattern("[0-9]*")]);
-  	return json;
+  	return fb.group(json);
   }
 }
 

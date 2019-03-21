@@ -18,12 +18,12 @@
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
-        (click)="drawer.toggle()"
+        (click)="toggleNav()"
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>
-        <button mat-icon-button (click)="drawer.toggle(); toggleNav();">
+        <button mat-icon-button (click)="toggleNav();">
           <mat-icon><!-- more_vert -->{{ closed ? "chevron_right" : "chevron_left"}}</mat-icon>
         </button>
         Course Scheduling Automation
@@ -33,8 +33,10 @@
     <h1>{{title}}</h1>
 
     <br>
+    <div (click)="!closed ? toggleNav() : null">
     <router-outlet></router-outlet>
     <app-messages></app-messages>
+    </div>
     <!-- <router-outlet></router-outlet> -->
     <!-- Add Content Here -->
   </mat-sidenav-content>

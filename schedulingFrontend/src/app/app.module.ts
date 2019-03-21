@@ -19,7 +19,9 @@ import { FormPageComponent } from './form-page/form-page.component';
 // import { FormBaseComponent } from './form-base/form-base.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatStepperModule, MatInputModule, MatButtonModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatSelectModule, MatRadioModule, MatCardModule} from '@angular/material';
-import { NavComponentComponent } from './nav-component/nav-component.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatChipsModule} from '@angular/material/chips';
+import { NavComponent } from './nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { FormGroupDisplayComponent } from './form-group-display/form-group-display.component';
 // import { AddressFormComponent } from './address-form/address-form.component';
@@ -38,7 +40,7 @@ import { FormGroupDisplayComponent } from './form-group-display/form-group-displ
     MessagesComponent,
     MessageWriterComponent,
     FormPageComponent,
-    NavComponentComponent,
+    NavComponent,
     FormGroupDisplayComponent
     // AddressFormComponent,
     // FormBaseComponent,
@@ -52,7 +54,7 @@ import { FormGroupDisplayComponent } from './form-group-display/form-group-displ
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatStepperModule, MatInputModule, MatButtonModule, LayoutModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatSelectModule, MatRadioModule, MatCardModule,
+    MatStepperModule, MatInputModule, MatButtonModule, LayoutModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatSelectModule, MatRadioModule, MatCardModule,MatExpansionModule,MatChipsModule,
   ],
   providers: [DataService, MessageService,StudentFormService,],
   bootstrap: [AppComponent]

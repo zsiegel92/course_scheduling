@@ -7,7 +7,7 @@
   <button mat-button (click)="submit();">SUBMIT</button>
   <button mat-button (click)="stepper.linear=false; stepper.previous(); stepper.linear=true;">BACK</button>
   <button mat-button (click)="stepper.linear=false; stepper.next(); stepper.linear=true;">NEXT</button>
-  <div #tests hidden="true">
+  <div #tests hidden="false">
     <!-- student: {{student | json }} -->
       <br>
       basicForm: <app-form-group-display [form-group]="basicForm"></app-form-group-display>
@@ -109,19 +109,73 @@
 
 
   <mat-step [stepControl]="interestForm">
-    <ng-template matStepLabel>What skills interest you?</ng-template>
+    <ng-template matStepLabel>What courses interest you?</ng-template>
+
+
     <form [formGroup]="interestForm">
 
-      <mat-selection-list #interestSelector formControlName="preferences">
-        <div *ngFor="let interest of interests">
-          <mat-list-option [value]="interest">
-            {{interest.name}}
-          </mat-list-option>
-        </div>
-      </mat-selection-list>
-      <p>
-        Options selected: {{interestSelector.selectedOptions.selected.length}}
-      </p>
+
+      <mat-expansion-panel #skillPanel
+                           (opened)="skillPanelOpen = true;"
+                           (closed)="skillPanelOpen = false; coursePanel.open();"
+                           expanded="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Filter by Skills!
+          </mat-panel-title>
+          <mat-panel-description>
+            {{skillPanelOpen ? 'Select Skills' : 'Filter by Skills'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-selection-list #interestSelector formControlName="preferences">
+          <div *ngFor="let interest of interests">
+            <mat-list-option [value]="interest">
+              {{interest.name}}
+            </mat-list-option>
+          </div>
+        </mat-selection-list>
+        <button mat-raised-button (click)="coursePanel.open();">Ready to pick courses!</button>
+      </mat-expansion-panel>
+
+      <div>
+        <mat-chip-list style="display:inline-block; padding:10px;">
+          <mat-chip selectable="true" (selectionChange)="say($event)" color="primary" *ngFor="let interest of interestForm.controls.preferences.value">{{interest.name}}<mat-icon (click)="removeInterest(interest)" matChipRemove>cancel</mat-icon></mat-chip>
+        </mat-chip-list>
+        <span style="display:inline-block; padding:10px;">
+          {{interestSelector.selectedOptions.selected.length}} Skills!
+        </span>
+      </div>
+      <mat-expansion-panel #coursePanel
+                           (opened)="coursePanelOpen = true; skillPanel.close();"
+                           (closed)="coursePanelOpen = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Select Courses
+            </mat-panel-title>
+            <mat-panel-description>
+              {{coursePanelOpen ? 'Click to Select Courses' : 'Select Courses'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          Select these courses.
+
+
+     </mat-expansion-panel>
+
+
+<!--
+      <mat-expansion-panel #course>
+         <mat-expansion-panel-header>
+           <mat-panel-title>
+             Self aware panel
+           </mat-panel-title>
+           <mat-panel-description>
+             Currently I am open/closed
+           </mat-panel-description>
+         </mat-expansion-panel-header>
+         <p>I'm visible because I am open</p>
+         <mat-action-row><button mat-button (click)="addMe(course)">Close All</button></mat-action-row>
+       </mat-expansion-panel> -->
+
 
 
 

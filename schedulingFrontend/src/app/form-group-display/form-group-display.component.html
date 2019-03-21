@@ -1,7 +1,7 @@
 <ul>
   <li *ngFor="let field of formGroup.controls | keyvalue">
      {{field.key}}: {{field.value.value | json}}
-     <button mat-button (click)="subFields.hidden = !subFields.hidden">Show More</button>
+     <button mat-button (click)="subFields.hidden = !subFields.hidden">Show {{subFields.hidden ? "More" : "Less"}}</button>
      <ul #subFields hidden="true">
      	<div *ngFor="let subField of field.value | keyvalue" >
        	<li *ngIf="subField.key[0] != '_'">
