@@ -35,9 +35,9 @@ export class StudentFormService implements FormService {
       this.setInterests();
       this.setCourses();
       this.messageService
-      for (let course of this.courses) {
-        this.sayJSON(course);
-      }
+      // for (let course of this.courses) {
+      //   this.sayJSON(course);
+      // }
     }
 
   	submit():void{
@@ -87,11 +87,16 @@ export class StudentFormService implements FormService {
     }
 
     makeInterestForm(): FormGroup {
-      this.forms['interest'] = this.fb.group({preferences: new FormControl([])})
+      this.forms['interest'] = this.fb.group({skills: new FormControl([]),courses: new FormControl([])})
       return this.forms['interest'];
     }
     getStates() : any[]{
       return States;
     }
-
+    removeInterest(interest:Skill){
+      let vals = this.forms['interest'].controls.skills.value;
+      let index = vals.findIndex(other_interest => (other_interest== interest));
+      vals.splice(index,1);
+      this.forms['interest'].controls.skills.setValue(vals);
+    }
 }

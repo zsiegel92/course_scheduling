@@ -1,0 +1,17 @@
+<ul style="border-left: 1px solid black;">
+	<ng-container *ngFor="let field of obj | keyvalue">
+	  <ng-container *ngIf="field.key[0] != '_'">
+		  <li >
+		    {{field.key}}: "{{ value ? field.value[value] : field.value}}"
+		    <ng-container *ngIf="depth<maxDepth">
+		     	<button  *ngIf="child.numChildren > 0" [hidden]="true" (click)="sub.hidden = !sub.hidden" mat-button >
+		     		Show {{sub.hidden ?  child.numChildren + " More" : "Less"}}
+		     	</button>
+		     	<div #sub hidden="true">
+			     	<app-safe-object #child [depth]="depth+1" [object]="field.value"></app-safe-object>
+		     	</div>
+		    </ng-container>
+		   </li>
+	   </ng-container>
+   </ng-container>
+</ul>

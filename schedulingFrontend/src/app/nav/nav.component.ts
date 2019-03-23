@@ -19,7 +19,7 @@ export class NavComponent {
 
   toggleNav() {
   	this.closed = !this.closed;
-  	this.drawer.toggle();
+  	// this.drawer.toggle();
   }
   constructor(private breakpointObserver: BreakpointObserver) {}
 

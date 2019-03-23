@@ -55,7 +55,8 @@
 				"serve": {
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"options": {
-						"browserTarget": "schedulingFrontend:build"
+						"browserTarget": "schedulingFrontend:build",
+						"host": "0.0.0.0"
 					},
 					"configurations": {
 						"production": {

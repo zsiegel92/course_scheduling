@@ -23,7 +23,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatChipsModule} from '@angular/material/chips';
 import { NavComponent } from './nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { FormGroupDisplayComponent } from './form-group-display/form-group-display.component';
+// import { FormGroupDisplayComponent } from './form-group-display/form-group-display.component';
+import { SafeObjectComponent } from './safe-object/safe-object.component';
 // import { AddressFormComponent } from './address-form/address-form.component';
 // import { StudentForm1Component } from './student-form-1/student-form-1.component';
 // import { FormVenueComponent } from './form-venue/form-venue.component';
@@ -41,7 +42,8 @@ import { FormGroupDisplayComponent } from './form-group-display/form-group-displ
     MessageWriterComponent,
     FormPageComponent,
     NavComponent,
-    FormGroupDisplayComponent
+    SafeObjectComponent,
+    // FormGroupDisplayComponent,
     // AddressFormComponent,
     // FormBaseComponent,
     // StudentForm1Component

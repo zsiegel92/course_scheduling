@@ -7,6 +7,7 @@ import { StudentFormService } from '../student-form.service';
 import { Student } from '../student';
 // import { FormBaseComponent } from '../form-base/form-base.component';
 import { Skill } from '../skill';
+import { Course } from '../course';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 // import {MatStepperModule} from '@angular/material/stepper';
@@ -16,13 +17,13 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./student-form.component.css']
 })
 export class StudentFormComponent implements OnInit {
-
+	states: any[];
 	// student: Student;
   basicForm: FormGroup;
   interestForm: FormGroup;
   interests: Skill[] =[];
   hasUnitNumber = false;
-  states: any[];
+  courses: Course[] = [];
 
   submit() {
   	// let student = new Student();
@@ -35,6 +36,7 @@ export class StudentFormComponent implements OnInit {
   	// this.basicInfo = new BasicInfo();
   	this.states = studentFormService.getStates();
   	this.interests = studentFormService.getInterests();
+  	this.courses = studentFormService.getCourses();
   	this.basicForm = studentFormService.makeBasicForm();
   	this.interestForm = this.studentFormService.makeInterestForm();
   }
@@ -42,10 +44,7 @@ export class StudentFormComponent implements OnInit {
   	this.studentFormService.say(message);
   }
   removeInterest(interest:Skill){
-  	let vals = this.interestForm.controls.preferences.value;
-  	let index = vals.findIndex(other_interest => (other_interest== interest));
-  	vals.splice(index,1);
-  	this.interestForm.controls.preferences.setValue(vals);
+  	return this.studentFormService.removeInterest(interest);
   }
   // addMe(course:any){
 
