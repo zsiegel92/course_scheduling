@@ -2,9 +2,14 @@
 	<ng-container *ngFor="let field of obj | keyvalue">
 	  <ng-container *ngIf="field.key[0] != '_'">
 		  <li >
-		    {{field.key}}: "{{ value ? field.value[value] : field.value}}"
+		  	<ng-container *ngIf="safeJson || field.key == 'value'; else unsafeJson;">
+		  		{{field.key}}{{value ? "." + value : ''}}: "{{ value ? (field.value[value] | json) : (field.value | json)}}"
+		  	</ng-container>
+		  	<ng-template #unsafeJson>
+			    {{field.key}}{{value ? "." + value : ''}}: "{{ value ? field.value[value] : field.value}}"
+		    </ng-template>
 		    <ng-container *ngIf="depth<maxDepth">
-		     	<button  *ngIf="child.numChildren > 0" [hidden]="true" (click)="sub.hidden = !sub.hidden" mat-button >
+		     	<button  *ngIf="child.numChildren > 0" (click)="sub.hidden = !sub.hidden" mat-button >
 		     		Show {{sub.hidden ?  child.numChildren + " More" : "Less"}}
 		     	</button>
 		     	<div #sub hidden="true">

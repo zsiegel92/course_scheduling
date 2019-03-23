@@ -8,8 +8,9 @@ import { Component, OnInit, Input,ViewChildren,QueryList, ElementRef,EventEmitte
 export class SafeObjectComponent implements AfterViewInit {
 	@Input("object") obj !: any;
 	@Input("depth") depth: number = 0;
-	@Input("maxDepth") maxDepth: number = 7;
+	@Input("maxDepth") maxDepth: number = 4;
 	@Input("value") value: any = null;
+	@Input("safeJson") safeJson: boolean = false;
 	@ViewChildren("child") children !: QueryList<ElementRef>;
 	numChildren: number = 0;
 

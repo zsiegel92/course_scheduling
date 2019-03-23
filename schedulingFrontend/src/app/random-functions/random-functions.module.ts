@@ -6,6 +6,15 @@ export function randInt(min: number,max:number) {
 	return Math.floor(Math.random() * (max-min + 1)) + min;
 }
 
+// export function times(max: number) {
+//   return {
+//     [Symbol.iterator]: function* () {
+//       for (let i = 0; i < max; i++, yield) {
+//       }
+//     }
+//   };
+// }
+
 export function randomlySelectKIndices(k:number,n:number){
   let inds: number[] = [];
   var replace: number;

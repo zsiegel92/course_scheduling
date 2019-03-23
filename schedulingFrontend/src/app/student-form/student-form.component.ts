@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, QueryList,ElementRef} from '@angular/core';
+import { Component, OnInit, AfterViewInit, QueryList,ElementRef,ViewEncapsulation} from '@angular/core';
 // import { Router } from '@angular/router';
 // import { DataService } from '../data.service';
 import { StudentFormService } from '../student-form.service';
@@ -10,11 +10,12 @@ import { Skill } from '../skill';
 import { Course } from '../course';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-// import {MatStepperModule} from '@angular/material/stepper';
+//ViewEncapsulation for tooltip matTooltipClass
 @Component({
   selector: 'app-student-form',
   templateUrl: './student-form.component.html',
-  styleUrls: ['./student-form.component.css']
+  styleUrls: ['./student-form.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class StudentFormComponent implements OnInit {
 	states: any[];
@@ -24,6 +25,22 @@ export class StudentFormComponent implements OnInit {
   interests: Skill[] =[];
   hasUnitNumber = false;
   courses: Course[] = [];
+
+
+  // ngFor [ngForOf]="courseCardHeight()"
+  courseCardHeight() {
+  	return this.times(6);
+  }
+  // https://stackoverflow.com/questions/36535629/repeat-html-element-multiple-times-using-ngfor-based-on-a-number
+  // ngFor [ngForOf]="times(6)"
+  times(max: number) {
+    return {
+      [Symbol.iterator]: function* () {
+        for (let i = 0; i < max; i++, yield) {
+        }
+      }
+    };
+  }
 
   submit() {
   	// let student = new Student();

@@ -30,4 +30,6 @@ mat-form-field {
   margin-right: 0;
 }
 
-
+.tooltip-red {
+  background: #b71c1c;
+}

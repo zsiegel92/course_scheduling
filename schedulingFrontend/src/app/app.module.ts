@@ -21,6 +21,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatStepperModule, MatInputModule, MatButtonModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatSelectModule, MatRadioModule, MatCardModule} from '@angular/material';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 import { NavComponent } from './nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 // import { FormGroupDisplayComponent } from './form-group-display/form-group-display.component';
@@ -56,7 +59,7 @@ import { SafeObjectComponent } from './safe-object/safe-object.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatStepperModule, MatInputModule, MatButtonModule, LayoutModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatSelectModule, MatRadioModule, MatCardModule,MatExpansionModule,MatChipsModule,
+    MatStepperModule, MatInputModule, MatButtonModule, LayoutModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatSelectModule, MatRadioModule, MatCardModule,MatExpansionModule,MatChipsModule,MatButtonToggleModule,MatTooltipModule
   ],
   providers: [DataService, MessageService,StudentFormService,],
   bootstrap: [AppComponent]
