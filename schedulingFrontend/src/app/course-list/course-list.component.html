@@ -4,7 +4,7 @@
 	<br>
 	<mat-selection-list #selectionList [formControl]="parentForm.controls.courses">
 			<ng-container *ngFor="let course of courses">
-		    <mat-list-option  [matBadge]="numberInterestsForEachCourse[course.name]" matBadgePosition="before" matBadgeColor="warn" [value]="course" >
+		    <mat-list-option  [matBadge]="numberInterestsForEachCourse[course.name]" [matBadgeHidden]="numberInterestsForEachCourse[course.name]==0" matBadgePosition="before" matBadgeColor="warn" [value]="course" >
 		      <h2 matLine><b>{{course.name}}</b></h2>
 		      	<h3><em>{{course.desc}}</em></h3>
 		      	<span>{{course.min_age}}-{{course.max_age}} years</span>
