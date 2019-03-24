@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 })
 export class NavComponent {
 	closed: boolean = true;
-	@ViewChild('drawer') drawer;
+	// @ViewChild('drawer') drawer;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(

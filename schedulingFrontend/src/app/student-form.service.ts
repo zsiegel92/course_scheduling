@@ -23,6 +23,9 @@ export class StudentFormService implements FormService {
     public interests: Skill[] = [];
     public courses: Course[] = [];
     public forms: any = {};
+    getStates() : any[]{
+      return States;
+    }
 
     say(message: any){
       this.messageService.add(message);
@@ -46,15 +49,52 @@ export class StudentFormService implements FormService {
       this.sayJSON(bi);
       // this.router.navigate(['/submitted']);
   	}
+    makeBasicForm(): FormGroup{
+      let bi = new BasicInfo();
+      this.forms['basic']= bi.toFormGroup();
+      return this.forms['basic'];
+    }
+    makeInterestForm(): FormGroup {
+      this.forms['interest'] = this.fb.group({
+        skills: new FormControl([]),
+        courses: new FormControl([]),
+        age: new FormControl(9)
+      })
+      return this.forms['interest'];
+    }
+
+    getAge(){
+      return this.forms['interest'].controls.age.value;
+    }
+    removeInterest(interest:Skill): void{
+      let vals = this.forms['interest'].controls.skills.value;
+      let index = vals.findIndex(other_interest => (other_interest== interest));
+      vals.splice(index,1);
+      this.forms['interest'].controls.skills.setValue(vals);
+    }
+    addInterest(interest:Skill): void{
+      let vals = this.forms['interest'].controls.skills.value;
+      vals.push(interest);
+      this.forms['interest'].controls.skills.setValue(vals);
+    }
+    removeAllInterests():void{
+      this.forms['interest'].controls.skills.setValue([]);
+    }
+    addInterests(interests:Skill[]): void{
+      this.forms['interest'].controls.skills.setValue(interests);
+    }
+
     setInterests() {
-      for (let s of ["Web Development","Data Science","Art","Windows/Mac","Photography","Mathematics"]){
+      for (let s of ["Web Development","Data Science","Art","Photography & Video","Mathematics","Game Design","Music","3D-Design"]){
         this.interests.push(new Skill(s));
       }
     }
     getInterests() {
       return this.interests;
     }
-
+    getSelectedInterests(){
+      return this.forms['interest'].controls.skills.value;
+    }
     setCourses() {
       let id: string;
       let name: string;
@@ -63,12 +103,12 @@ export class StudentFormService implements FormService {
       let max_age: number;
       let skills: Skill[];
       this.courses = [];
-      for (let name of ["Databases for Dummies","Basic CRUD App","PhotoShop for Pros","Building a Raspberry Pi"]){
+      for (let name of ["Databases for Dummies","Basic CRUD App","PhotoShop for Pros","Building a Raspberry Pi","Mobile Game Development","GarageBand 101","Introductory AutoCAD"]){
         id = String(-1);
         desc = "A course involving " + name;
-        min_age = randInt(5,20);
-        max_age = randInt(min_age,20);
-        skills = randomlySelectK(randInt(0,this.interests.length-1), this.interests);
+        min_age = randInt(5,15);
+        max_age = randInt(min_age,15);
+        skills = randomlySelectK(randInt(1,this.interests.length-1), this.interests);
         this.courses.push(new Course(id,name,desc,min_age,max_age,skills));
       }
     }
@@ -77,26 +117,4 @@ export class StudentFormService implements FormService {
       return this.courses;
     }
 
-    getLastForm(){
-      return this.forms[this.forms.length-1];
-    }
-    makeBasicForm(): FormGroup{
-      let bi = new BasicInfo();
-      this.forms['basic']= bi.toFormGroup();
-      return this.forms['basic'];
-    }
-
-    makeInterestForm(): FormGroup {
-      this.forms['interest'] = this.fb.group({skills: new FormControl([]),courses: new FormControl([])})
-      return this.forms['interest'];
-    }
-    getStates() : any[]{
-      return States;
-    }
-    removeInterest(interest:Skill){
-      let vals = this.forms['interest'].controls.skills.value;
-      let index = vals.findIndex(other_interest => (other_interest== interest));
-      vals.splice(index,1);
-      this.forms['interest'].controls.skills.setValue(vals);
-    }
 }

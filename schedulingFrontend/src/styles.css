@@ -10,8 +10,11 @@
 /*@import "~@angular/material/prebuilt-themes/indigo-pink.css";*/
 
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/*html, body { height: 100%; }*/
+body { font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
 
 /*.dark-primary-color    { background: #5D4037; }
 .default-primary-color { background: #795548; }

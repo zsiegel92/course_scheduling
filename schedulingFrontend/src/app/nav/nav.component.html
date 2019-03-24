@@ -3,14 +3,16 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="!closed"
+      (openedStart)="closed=false"
+      (closedStart)="closed=true"
       >
     <mat-toolbar>I am...</mat-toolbar>
     <mat-nav-list (click)="toggleNav();">
       <a mat-list-item routerLink='/studentForm'>A student or parent</a>
       <a mat-list-item routerLink='/teacherForm'>A teacher</a>
       <a mat-list-item routerLink='/schedule'>An administrator</a>
-      <app-message-writer mat-list-item></app-message-writer>
     </mat-nav-list>
+    <app-message-writer mat-list-item></app-message-writer>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
@@ -22,15 +24,13 @@
         *ngIf="isHandset$ | async; else desktopButton">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>
-        <ng-template #desktopButton>
-          <button mat-icon-button (click)="toggleNav();">
-            <mat-icon>{{ closed ? "chevron_right" : "chevron_left"}}</mat-icon>
-          </button>
-        </ng-template>
-        Course Scheduling Automation
-      </span>
 
+      <ng-template #desktopButton>
+        <button mat-icon-button (click)="toggleNav();">
+          <mat-icon>{{ closed ? "chevron_right" : "chevron_left"}}</mat-icon>
+        </button>
+      </ng-template>
+      Course Scheduling Automation
     </mat-toolbar>
     <!-- ng-content></ng-content> -->
     <div (click)="!closed ? toggleNav() : null">

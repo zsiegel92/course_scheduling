@@ -23,11 +23,15 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSliderModule} from '@angular/material/slider';
 import { NavComponent } from './nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import {MatBadgeModule} from '@angular/material/badge';
+
 // import { FormGroupDisplayComponent } from './form-group-display/form-group-display.component';
 import { SafeObjectComponent } from './safe-object/safe-object.component';
+import { CourseListComponent } from './course-list/course-list.component';
 // import { AddressFormComponent } from './address-form/address-form.component';
 // import { StudentForm1Component } from './student-form-1/student-form-1.component';
 // import { FormVenueComponent } from './form-venue/form-venue.component';
@@ -46,6 +50,7 @@ import { SafeObjectComponent } from './safe-object/safe-object.component';
     FormPageComponent,
     NavComponent,
     SafeObjectComponent,
+    CourseListComponent,
     // FormGroupDisplayComponent,
     // AddressFormComponent,
     // FormBaseComponent,
@@ -59,7 +64,7 @@ import { SafeObjectComponent } from './safe-object/safe-object.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatStepperModule, MatInputModule, MatButtonModule, LayoutModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatSelectModule, MatRadioModule, MatCardModule,MatExpansionModule,MatChipsModule,MatButtonToggleModule,MatTooltipModule
+    MatStepperModule, MatInputModule, MatButtonModule, LayoutModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatSelectModule, MatRadioModule, MatCardModule,MatExpansionModule,MatChipsModule,MatButtonToggleModule,MatTooltipModule,MatSnackBarModule,MatSliderModule,MatBadgeModule
   ],
   providers: [DataService, MessageService,StudentFormService,],
   bootstrap: [AppComponent]

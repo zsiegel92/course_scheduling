@@ -7,12 +7,14 @@
   <button mat-button (click)="submit();">SUBMIT</button>
   <button mat-button (click)="stepper.linear=false; stepper.previous(); stepper.linear=true;">BACK</button>
   <button mat-button (click)="stepper.linear=false; stepper.next(); stepper.linear=true;">NEXT</button>
-  <div #tests > <!-- hidden="true" -->
+  <div #tests hidden="true"> <!-- hidden="true" -->
       <br>
 
-      basicForm: <app-safe-object [object]="basicForm.controls" value='value'></app-safe-object>
+      <!-- basicForm: <app-safe-object [object]="basicForm.controls" value='value'></app-safe-object> -->
       <br>
-      interestForm: <app-safe-object [object]="interestForm.controls" value='value' safeJson="true"></app-safe-object>
+      <!-- interestForm: <app-safe-object [object]="interestForm.controls" value='value' safeJson="true"></app-safe-object> -->
+
+      <!-- interestForm BASIC: <app-safe-object [object]="interestForm" maxDepth="7"></app-safe-object> -->
       <!--      skills: <app-safe-object [object]="interestForm.controls.skills.value" safeJson="true"></app-safe-object>
            courses: <app-safe-object [object]="interestForm.controls.courses.value" safeJson="true"></app-safe-object>
        -->
@@ -44,13 +46,13 @@
         <input matInput type="email" formControlName="email" placeholder="Email Address" autocomplete='email' required>
         <mat-error>Enter a valid email address (address@domain)</mat-error>
       </mat-form-field>
-
+      <br>
       <mat-form-field>
         <span matPrefix>+1 &nbsp;</span>
         <input matInput placeholder="Phone Number" formControlName="phone" size="15" type="tel" required>
         <mat-error>Enter a valid phone number, eg (999)999-9999</mat-error>
       </mat-form-field>
-
+      <br>
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
@@ -69,12 +71,14 @@
         </div>
       </div>
       <div class="row" *ngIf="hasUnitNumber">
+        <br>
         <div class="col">
           <mat-form-field class="full-width">
             <textarea matInput placeholder="Address 2" formControlName="address2"></textarea>
           </mat-form-field>
         </div>
       </div>
+      <br>
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
@@ -117,54 +121,60 @@
 
     <form [formGroup]="interestForm">
 
-
       <mat-expansion-panel #skillPanel
                            (opened)="skillPanelOpen = true;"
                            (closed)="skillPanelOpen = false; coursePanel.open();"
                            expanded="true">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            Filter by Skills!
+            Filter by Age and Skills!
           </mat-panel-title>
           <mat-panel-description>
-            {{skillPanelOpen ? 'Skills' : 'Click for Skills'}}
+            {{skillPanelOpen ? 'Age & Skills' : 'Click for Age & Skills'}}
           </mat-panel-description>
         </mat-expansion-panel-header>
 
+<!--         courses: {{courses | json}}
+        ageAppropriateCourses: {{ageAppropriateCourses | json}}
+        numberAgeAppropriate: {{numberAgeAppropriate | json}} -->
+        <h3>Age: {{ageSlider.value ? ageSlider.value : ageSlider.min }}</h3>
+        <mat-slider #ageSlider formControlName="age"
+          thumbLabel="true"
+          tickInterval="1"
+          min="5"
+          max="15"
+          style="padding: 10px;"
+          (change)="removeMinValStyles(); applyCourseFilters();"></mat-slider>
+        <h3>Skills (and number of age-appropriate courses available)</h3>
         <mat-selection-list #interestSelector formControlName="skills">
           <div *ngFor="let interest of interests">
             <mat-list-option [value]="interest">
-              {{interest.name}}
+              {{interest.name}} ({{numberAgeAppropriate[interest.name]}})
             </mat-list-option>
           </div>
         </mat-selection-list>
-        <button mat-raised-button (click)="skillPanel.close(); coursePanel.open();">Ready to pick courses!</button>
+        <!--  -->
+        <button mat-raised-button (click)="skillPanel.close(); courseSelector.focus(); coursePanel.open();">Ready to pick courses!</button>
         <span style="float:right;">
-
-          <!-- All - <mat-button-toggle-group  aria-label="All Interests" multiple="false">
-            <mat-button-toggle [checked]="interestSelector.selectedOptions.selected.length == interests.length" (click)="interestSelector.selectAll();"><mat-icon>check_box</mat-icon></mat-button-toggle>
-            <mat-button-toggle [checked]="interestSelector.selectedOptions.selected.length == 0" (click)="interestSelector.deselectAll();"><mat-icon>check_box_outline_blank</mat-icon></mat-button-toggle>
-          </mat-button-toggle-group> -->
-
           <mat-button-toggle-group   aria-label="All Interests" multiple="false">
             <mat-button-toggle matTooltip="Select All" matTooltipPosition="left" matTooltipHideDelay="1000" [hidden]="interestSelector.selectedOptions.selected.length > 0" (click)="interestSelector.selectAll();"><mat-icon>check_box_outline_blank</mat-icon></mat-button-toggle>
 
             <mat-button-toggle matTooltip="Select None" matTooltipPosition="left" matTooltipHideDelay="1000" [hidden]="interestSelector.selectedOptions.selected.length < interests.length" (click)="interestSelector.deselectAll();"><mat-icon>check_box</mat-icon></mat-button-toggle>
 
-            <mat-button-toggle (mouseenter)="indeterminateIcon.color='warn'" (mouseleave)="indeterminateIcon.color=null" matTooltip="Select None" matTooltipPosition="left" matTooltipHideDelay="1000" matTooltipClass='tooltip-red' [hidden]="interestSelector.selectedOptions.selected.length == interests.length || interestSelector.selectedOptions.selected.length == 0" (click)="interestSelector.deselectAll();"><mat-icon #indeterminateIcon>indeterminate_check_box</mat-icon></mat-button-toggle>
+            <mat-button-toggle (mouseenter)="indeterminateIcon.color='warn'" (mouseleave)="indeterminateIcon.color=null" matTooltip="Select None" matTooltipPosition="left" matTooltipHideDelay="1000" matTooltipClass='tooltip-red' [hidden]="interestSelector.selectedOptions.selected.length == interests.length || interestSelector.selectedOptions.selected.length == 0" (click)="removeAllInterests();"><mat-icon #indeterminateIcon>indeterminate_check_box</mat-icon></mat-button-toggle>
           </mat-button-toggle-group>
-
         </span>
-        </mat-expansion-panel>
+      </mat-expansion-panel>
 
       <div>
         <mat-chip-list style="display:inline-block; padding:10px;">
-          <mat-chip selectable="true" (selectionChange)="say($event)" color="primary" *ngFor="let interest of interestForm.controls.skills.value">{{interest.name}}<mat-icon (click)="removeInterest(interest)" matChipRemove>cancel</mat-icon></mat-chip>
+          <mat-chip selectable="true" color="primary" *ngFor="let interest of interestForm.controls.skills.value" class="mat-primary" selected>{{interest.name}}<mat-icon (click)="removeInterest(interest)" matChipRemove>cancel</mat-icon></mat-chip>
         </mat-chip-list>
         <span style="display:inline-block; padding:10px;">
           Interested in {{interestSelector.selectedOptions.selected.length}} Skills!
         </span>
       </div>
+
       <mat-expansion-panel #coursePanel
                            (opened)="coursePanelOpen = true; skillPanel.close();"
                            (closed)="coursePanelOpen = false">
@@ -173,22 +183,28 @@
               Select Courses
             </mat-panel-title>
             <mat-panel-description>
-              {{coursePanelOpen ? 'Courses' : 'Click for Courses'}}
+              <ng-container *ngIf="coursePanelOpen; else closedCoursePanelDescription">
+                Courses
+              </ng-container>
+              <ng-template #closedCoursePanelDescription>
+                Click for Courses
+              </ng-template>
             </mat-panel-description>
           </mat-expansion-panel-header>
 
-          <mat-selection-list #courseSelector formControlName="courses">
-            <div *ngFor="let course of courses">
-              <mat-list-option [ngClass]="'mat-multi-line'" [value]="course">
-                <h4 matLine>{{course.name}}</h4>
-                <p [ngClass]="'mat-multi-line'">{{course.desc}}</p>
-                <ng-container *ngFor="let i of courseCardHeight()">
-                  <p matLine hidden="true"></p>
-                </ng-container>
-
+<!--           <mat-selection-list #courseSelector formControlName="courses">
+            <ng-container *ngFor="let course of courses">
+              <mat-list-option [value]="course">
+                <h2 matLine><b>{{course.name}}</b></h2>
+                <p matLine>{{course.desc}}</p>
               </mat-list-option>
-            </div>
-          </mat-selection-list>
+              <ng-container *ngFor="let i of courseCardHeight()">
+                <p matLine hidden="true"></p>
+              </ng-container>
+            </ng-container>
+          </mat-selection-list> -->
+
+          <app-course-list #courseSelector [parentForm]="interestForm" [courses]="courses"></app-course-list>
 
      </mat-expansion-panel>
 

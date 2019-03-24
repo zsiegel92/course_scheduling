@@ -7,6 +7,8 @@ export class Course {
 	min_age: number;
 	max_age: number;
 	skills: Skill[];
+	// selected:boolean=false;
+
 	constructor(id:string,name:string,desc:string,min_age:number,max_age:number,skills:Skill[]){
 		this.id = id;
 		this.name = name;
@@ -14,5 +16,6 @@ export class Course {
 		this.min_age = min_age;
 		this.max_age = max_age;
 		this.skills = skills;
+
 	}
 }

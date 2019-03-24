@@ -15,7 +15,7 @@ export class BasicInfo {
   fromFormGroup(formGroup: FormGroup):void{
   	for (let field in formGroup.controls){
   		this[field] = formGroup.controls[field].value;
-  		console.log("this." + field + ": " + this[field]);
+  		// console.log("this." + field + ": " + this[field]);
   	}
   }
   constructor(){
@@ -28,7 +28,7 @@ export class BasicInfo {
   	for (let field in json){
   		json[field] = [json[field],Validators.required];
   	}
-  	json['phone'][1]=Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(15)]);
+  	json['phone'][1]=Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(15),Validators.pattern(/^([0-9]( *| ?- ?|.)?)?(\(?[0-9]{3}\)?|[0-9]{3})( *| ?- ?|.)?([0-9]{3}( *| ?- ?|.)?[0-9]{4}|[a-zA-Z0-9]{7})$/)]);
   	json['address2'] = json['address2'][0];
   	json['zip'][1] = Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(5), Validators.pattern("[0-9]*")]);
   	return fb.group(json);

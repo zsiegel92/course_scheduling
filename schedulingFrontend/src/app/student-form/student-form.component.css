@@ -1,15 +1,21 @@
+/*@import "~/src/custom-theme.scss";*/
+
+/*.mat-slider-min-value.mat-slider-thumb-label-showing .mat-slider-thumb, .mat-slider-min-value.mat-slider-thumb-label-showing .mat-slider-thumb-label,
+  .mat-slider-thumb-label{
+  background-color: #ffe0b2;
+}*/
+
+
+
 mat-form-field {
 	width:80%;
+  padding-top:1em;
 }
 
 .full-width {
   width: 100%;
 }
 
-.shipping-card {
-  min-width: 120px;
-  margin: 20px auto;
-}
 
 .mat-radio-button {
   display: block;
