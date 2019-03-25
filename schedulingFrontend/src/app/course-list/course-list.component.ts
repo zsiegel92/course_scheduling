@@ -49,12 +49,12 @@ export class CourseListComponent implements AfterViewInit {
   		this.chips.map((chip) => {
   			// chip.nativeElement.textContent is "skill.name"
   			if (this.parentForm.controls.skills.value.some(s => s.name === chip.nativeElement.textContent)){
-  				chip.nativeElement.classList.remove('mat-accent');
-  				chip.nativeElement.classList.add("mat-primary");
+  				chip.nativeElement.classList.remove('uninterested');
+  				chip.nativeElement.classList.add("interested");
   			}
   			else {
-  				chip.nativeElement.classList.remove('mat-primary');
-  				chip.nativeElement.classList.add("mat-accent");
+  				chip.nativeElement.classList.remove('interested');
+  				chip.nativeElement.classList.add("uninterested");
   			}
   		});
   	});

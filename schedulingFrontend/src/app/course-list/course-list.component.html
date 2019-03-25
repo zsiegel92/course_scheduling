@@ -1,22 +1,25 @@
 	<h3 style="display:inline-block;">Courses</h3><span style="margin-right:1em;margin-left:1em;">with </span>
-	<span matBadge="x" matBadgeSize="small" matBadgePosition="before" matBadgeOverlap="false" matBadgeColor="warn">x matched interests</span>
+	<span matBadge="x❤️" matBadgeSize="small" matBadgePosition="before" matBadgeOverlap="false" matBadgeColor="accent">x matched interests</span>
 	<br>
 	<br>
 	<mat-selection-list #selectionList [formControl]="parentForm.controls.courses">
-			<ng-container *ngFor="let course of courses">
-		    <mat-list-option  [matBadge]="numberInterestsForEachCourse[course.name]" [matBadgeHidden]="numberInterestsForEachCourse[course.name]==0" matBadgePosition="before" matBadgeColor="warn" [value]="course" >
+			<ng-container *ngFor="let course of courses; last as last">
+		    <mat-divider></mat-divider>
+		    <mat-list-option  [matBadge]="numberInterestsForEachCourse[course.name] + '❤️'" [matBadgeHidden]="numberInterestsForEachCourse[course.name]==0" matBadgeSize="medium" matBadgePosition="before" matBadgeColor="accent" [value]="course" >
 		      <h2 matLine><b>{{course.name}}</b></h2>
 		      	<h3><em>{{course.desc}}</em></h3>
 		      	<span>{{course.min_age}}-{{course.max_age}} years</span>
 
 						<mat-chip-list selectable="false" style="padding:10px;">
 							<ng-container *ngFor="let skill of course.skills">
-							  <mat-chip class="mat-accent" disabled="true" value="skill.name" #chip selected>{{skill.name}}</mat-chip>
+							  <mat-chip class="uninterested" disabled="true" value="skill.name" color="primary" #chip selected>{{skill.name}}</mat-chip>
 						  </ng-container>
 						</mat-chip-list>
 		      <ng-container *ngFor="let i of courseCardHeight()">
 		        <p matLine hidden="true"></p>
 		      </ng-container>
 		    </mat-list-option>
+		    <mat-divider></mat-divider>
+		    <br *ngIf="!last">
 	    </ng-container>
 	</mat-selection-list>

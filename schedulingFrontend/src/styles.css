@@ -10,7 +10,10 @@
 /*@import "~@angular/material/prebuilt-themes/indigo-pink.css";*/
 
 
-/*html, body { height: 100%; }*/
+html, body {
+	height: 100%;
+	overflow-y: hidden !important;
+}
 body { font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 

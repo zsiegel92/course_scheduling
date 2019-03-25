@@ -15,7 +15,7 @@ import { StudentFormComponent } from './student-form/student-form.component';
 import { StudentFormService } from './student-form.service';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageWriterComponent } from './message-writer/message-writer.component';
-import { FormPageComponent } from './form-page/form-page.component';
+// import { FormPageComponent } from './form-page/form-page.component';
 // import { FormBaseComponent } from './form-base/form-base.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatStepperModule, MatInputModule, MatButtonModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatSelectModule, MatRadioModule, MatCardModule} from '@angular/material';
@@ -47,7 +47,7 @@ import { CourseListComponent } from './course-list/course-list.component';
     StudentFormComponent,
     MessagesComponent,
     MessageWriterComponent,
-    FormPageComponent,
+    // FormPageComponent,
     NavComponent,
     SafeObjectComponent,
     CourseListComponent,

@@ -28,6 +28,9 @@ export class StudentFormComponent implements OnInit,AfterViewInit {
   courses: Course[] = [];
   ageAppropriateCourses: Course[] = [];
   numberAgeAppropriate: any = {};
+  skillPanelOpen: boolean = true;
+  coursePanelOpen: boolean = false;
+
   // ngFor [ngForOf]="courseCardHeight()"
 
   // https://stackoverflow.com/questions/36535629/repeat-html-element-multiple-times-using-ngfor-based-on-a-number

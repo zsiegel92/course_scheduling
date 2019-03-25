@@ -168,10 +168,10 @@
 
       <div>
         <mat-chip-list style="display:inline-block; padding:10px;">
-          <mat-chip selectable="true" color="primary" *ngFor="let interest of interestForm.controls.skills.value" class="mat-primary" selected>{{interest.name}}<mat-icon (click)="removeInterest(interest)" matChipRemove>cancel</mat-icon></mat-chip>
+          <mat-chip selectable="true" color="primary" *ngFor="let interest of interestForm.controls.skills.value" selected>{{interest.name}}<mat-icon (click)="removeInterest(interest)" matChipRemove>cancel</mat-icon></mat-chip>
         </mat-chip-list>
         <span style="display:inline-block; padding:10px;">
-          Interested in {{interestSelector.selectedOptions.selected.length}} Skills!
+          Interested in {{interestSelector.selectedOptions.selected.length ? interestSelector.selectedOptions.selected.length + "❤️" : 'no😞'}} Skills!
         </span>
       </div>
 
