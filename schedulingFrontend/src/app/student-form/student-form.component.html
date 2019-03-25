@@ -2,22 +2,17 @@
 <p>Please submit by March 20, 2019.</p>
 <p>For assistance submitting this information, please contact zs@gmail.com</p>
 
-<div #testing>
+<!-- <div #testing>
   <button mat-button (click)="tests.hidden = !tests.hidden">{{tests.hidden? "SHOW" : "HIDE"}} TESTS</button>
   <button mat-button (click)="submit();">SUBMIT</button>
   <button mat-button (click)="stepper.linear=false; stepper.previous(); stepper.linear=true;">BACK</button>
   <button mat-button (click)="stepper.linear=false; stepper.next(); stepper.linear=true;">NEXT</button>
-  <div #tests hidden="true"> <!-- hidden="true" -->
+  <div #tests hidden="true">
       <br>
-
-      <!-- basicForm: <app-safe-object [object]="basicForm.controls" value='value'></app-safe-object> -->
+      basicForm: <app-safe-object [object]="basicForm.controls" value='value'></app-safe-object>
       <br>
-      <!-- interestForm: <app-safe-object [object]="interestForm.controls" value='value' safeJson="true"></app-safe-object> -->
+      interestForm: <app-safe-object [object]="interestForm.controls" value='value' safeJson="true"></app-safe-object>
 
-      <!-- interestForm BASIC: <app-safe-object [object]="interestForm" maxDepth="7"></app-safe-object> -->
-      <!--      skills: <app-safe-object [object]="interestForm.controls.skills.value" safeJson="true"></app-safe-object>
-           courses: <app-safe-object [object]="interestForm.controls.courses.value" safeJson="true"></app-safe-object>
-       -->
       <div>
         <button mat-button (click)="tests.hidden = !tests.hidden">{{tests.hidden? "SHOW" : "HIDE"}} TESTS</button>
         <button mat-button (click)="submit();">SUBMIT</button>
@@ -26,7 +21,9 @@
       </div>
   </div>
 </div>
-
+ -->
+ <button mat-button (click)="stepper.linear=false; stepper.previous(); stepper.linear=true;">(test) BACK</button>
+ <button mat-button (click)="stepper.linear=false; stepper.next(); stepper.linear=true;">(test) NEXT</button>
 
 
 <mat-horizontal-stepper editable="true" linear="true" #stepper>
