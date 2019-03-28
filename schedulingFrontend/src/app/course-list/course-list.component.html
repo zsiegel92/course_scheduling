@@ -8,7 +8,7 @@
 		    <mat-list-option  [matBadge]="numberInterestsForEachCourse[course.name] + '❤️'" [matBadgeHidden]="numberInterestsForEachCourse[course.name]==0" matBadgeSize="medium" matBadgePosition="before" matBadgeColor="accent" [value]="course" >
 		      <h2 matLine><b>{{course.name}}</b></h2>
 		      	<h3><em>{{course.desc}}</em></h3>
-		      	<span>{{course.min_age}}-{{course.max_age}} years</span>
+		      	<span>{{course.min_age}}-{{course.max_age}} years {{ (course.min_age < parentForm.controls.age.value && parentForm.controls.age.value < course.max_age) ? "😊" : "😞"}}</span>
 
 						<mat-chip-list selectable="false" style="padding:10px;">
 							<ng-container *ngFor="let skill of course.skills">

@@ -134,7 +134,19 @@
 <!--         courses: {{courses | json}}
         ageAppropriateCourses: {{ageAppropriateCourses | json}}
         numberAgeAppropriate: {{numberAgeAppropriate | json}} -->
-        <h3>Age: {{ageSlider.value ? ageSlider.value : ageSlider.min }}</h3>
+        <h3>Age: {{ageSlider.value ? ageSlider.value : ageSlider.min }}
+          <ng-container #youngAge *ngIf="ageSlider.value ? ageSlider.value < 8 : false; else middleAge">
+            👶
+          </ng-container>
+          <ng-template #middleAge>
+            <ng-container *ngIf="ageSlider.value ? ageSlider.value < 12 : false; else oldAge">
+              🧒
+            </ng-container>
+          </ng-template>
+          <ng-template #oldAge>
+            🧑
+          </ng-template>
+        </h3>
         <mat-slider #ageSlider formControlName="age"
           thumbLabel="true"
           tickInterval="1"
